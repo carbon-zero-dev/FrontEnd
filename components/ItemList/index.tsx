@@ -22,6 +22,10 @@ const ItemList = () => {
 	const setItemList = useSetRecoilState(itemListState);
 	const sum = useRecoilValue(itemListSumState);
 
+	const greeting = (name: string) => {
+		console.log('hello ' + name);
+	};
+
 	return (
 		<div>
 			<ItemContainer>
@@ -37,6 +41,9 @@ const ItemList = () => {
 				})}
 			</ItemContainer>
 			<p>sum : {sum}</p>
+			<Button variant="contained" onClick={() => greeting('stranger')}>
+				부르기
+			</Button>
 		</div>
 	);
 };

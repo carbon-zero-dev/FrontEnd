@@ -4,12 +4,7 @@ module.exports = {
 		node: true,
 		es2021: true,
 	},
-	extends: [
-		'next',
-		'eslint:recommended',
-		'plugin:react/recommended',
-		'prettier',
-	],
+	extends: ['next', 'prettier', 'eslint:recommended'],
 	parserOptions: {
 		ecmaFeatures: {
 			jsx: true,
@@ -19,7 +14,6 @@ module.exports = {
 	},
 	plugins: ['react'],
 	rules: {
-		'@next/next/no-page-custom-font': 'off',
 		'no-unused-vars': 'off',
 	},
 };
