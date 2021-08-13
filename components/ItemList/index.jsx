@@ -10,13 +10,13 @@ import styled from 'styled-components';
 const ItemContainer = styled.div`
 	display: flex;
 	padding: 10px;
-`
+`;
 
 const ItemBox = styled.div`
 	border: 1px solid red;
 	padding: 10px;
 	margin: 10px;
-`
+`;
 
 
 const ItemList = () => {
