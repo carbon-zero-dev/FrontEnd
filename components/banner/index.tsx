@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
-import bannerImage from '../public/pic1.jpg';
+import bannerImage from '../../public/pic2.jpg';
 
 const Wrapper = styled.div`
 	flex: 1;

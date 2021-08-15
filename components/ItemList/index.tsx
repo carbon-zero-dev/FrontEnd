@@ -1,50 +1,75 @@
-// @flow
 import * as React from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { itemListState } from '../../recoil/atoms';
 import { itemListSumState } from '../../recoil/selectors';
-import { Button } from '@material-ui/core';
 import styled from 'styled-components';
+import Image from 'next/image';
+import productImage from '../../public/pic1.jpg';
+import Banner from '../banner';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const ItemContainer = styled.div`
+	flex: 1;
 	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex-direction: row;
 	padding: 10px;
 `;
 
 const ItemBox = styled.div`
-	border: 1px solid red;
 	padding: 10px;
 	margin: 10px;
+	width: 340px;
+	cursor: pointer;
 `;
 
-const ItemList = () => {
+const ItemList = ({ href }) => {
 	const itemList = useRecoilValue(itemListState);
 	const setItemList = useSetRecoilState(itemListState);
 	const sum = useRecoilValue(itemListSumState);
-
-	const greeting = (name: string) => {
-		console.log('hello ' + name);
-	};
+	const router = useRouter();
 
 	return (
-		<div>
-			<ItemContainer>
-				{itemList.map(item => {
-					return (
-						<ItemBox key={item.id}>
-							<p>{item.id}</p>
-							<p>{item.name}</p>
-							<p>{item.category}</p>
-							<Button variant="contained">버튼</Button>
-						</ItemBox>
-					);
-				})}
-			</ItemContainer>
-			<p>sum : {sum}</p>
-			<Button variant="contained" onClick={() => greeting('stranger')}>
-				부르기
-			</Button>
-		</div>
+		<>
+			<div>
+				<Banner />
+			</div>
+			<div>
+				<ItemContainer>
+					{itemList.map(item => {
+						return (
+							<ItemBox key={item.id}>
+								<Link href={`/detailed/${item.id}`} passHref>
+									<a
+										style={{
+											textDecorationLine: 'none',
+											color: 'black',
+										}}
+									>
+										<Image
+											src={productImage}
+											alt="image of item"
+											width={200}
+											height={200}
+										/>
+										<p>{item.name}</p>
+										<p>{item.category}</p>
+										<p>
+											{item.description.length > 80
+												? item.description.slice(0, 80) + '...'
+												: item.description}
+										</p>
+									</a>
+								</Link>
+							</ItemBox>
+						);
+					})}
+				</ItemContainer>
+			</div>
+		</>
 	);
 };
 
