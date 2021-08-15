@@ -42,7 +42,7 @@ const ItemList = ({ href }) => {
 					{itemList.map(item => {
 						return (
 							<ItemBox key={item.id}>
-								<Link href={`/detailed/${item.id}`} passHref>
+								<Link href="/detail/[id]" as={`/detail/${item.id}`}>
 									<a
 										style={{
 											textDecorationLine: 'none',
