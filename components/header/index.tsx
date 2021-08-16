@@ -3,23 +3,21 @@ import styled from 'styled-components';
 import SearchBar from '../searchbar';
 
 const Title = styled.h1``;
+const HeaderContainer = styled.div`
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+`;
 
 const Header = () => {
 	return (
 		<>
-			<div
-				className="Header"
-				style={{
-					height: 300,
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-					justifyContent: 'center',
-				}}
-			>
+			<HeaderContainer className="Header">
 				<Title>탄소 노노 ✋✋</Title>
 				<SearchBar />
-			</div>
+			</HeaderContainer>
 		</>
 	);
 };

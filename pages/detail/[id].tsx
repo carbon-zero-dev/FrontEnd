@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 const detail = () => {
 	const router = useRouter;
-	console.log(router); // 라우터 객체를 출력합니다.
 
 	return (
 		<div>

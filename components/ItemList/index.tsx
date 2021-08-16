@@ -26,6 +26,11 @@ const ItemBox = styled.div`
 	cursor: pointer;
 `;
 
+const ImageLink = styled.a`
+	color: black;
+	text-decoration: none;
+`;
+
 const ItemList = ({ href }) => {
 	const itemList = useRecoilValue(itemListState);
 	const setItemList = useSetRecoilState(itemListState);
@@ -42,13 +47,8 @@ const ItemList = ({ href }) => {
 					{itemList.map(item => {
 						return (
 							<ItemBox key={item.id}>
-								<Link href="/detail/[id]" as={`/detail/${item.id}`}>
-									<a
-										style={{
-											textDecorationLine: 'none',
-											color: 'black',
-										}}
-									>
+								<Link href="/detail/[id]" as={`/detail/${item.id}`} passHref>
+									<ImageLink>
 										<Image
 											src={productImage}
 											alt="image of item"
@@ -62,7 +62,7 @@ const ItemList = ({ href }) => {
 												? item.description.slice(0, 80) + '...'
 												: item.description}
 										</p>
-									</a>
+									</ImageLink>
 								</Link>
 							</ItemBox>
 						);

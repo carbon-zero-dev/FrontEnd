@@ -8,6 +8,10 @@ const Container = styled.div`
 	justify-content: center;
 	height: 200px;
 `;
+const GithubLink = styled.a`
+	color: black;
+	text-decoration: none;
+`;
 const githubPath = 'https://github.com/carbon-zero-dev/FrontEnd';
 
 const Footer = () => {
@@ -15,16 +19,12 @@ const Footer = () => {
 		<footer>
 			<Container>
 				<div>
-					<a
-						href={`https://github.com/vercel/next.js/tree/canary/examples/${githubPath}`}
+					<GithubLink
+						href={`https://github.com/carbon-zero-dev/FrontEnd`}
 						className="mx-3 font-bold hover:underline"
-						style={{
-							color: 'black',
-							textDecorationLine: 'none',
-						}}
 					>
 						탄소노노 GitHub
-					</a>
+					</GithubLink>
 				</div>
 			</Container>
 		</footer>
