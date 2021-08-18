@@ -75,6 +75,7 @@ const ProductList = () => {
 				})}
 			</ProductContainer>
 			<p>sum : {sum}</p>
+			<Button variant="contained" onClick={() => window.location.href = '/submit'}>새로운 프로덕트 등록하기</Button>
 		</div>
 	);
 };
