@@ -6,6 +6,7 @@ import { productListSumState } from '../../recoil/selectors';
 import { Button } from '@material-ui/core';
 import styled from 'styled-components';
 import { commafy } from '../../utils/numbers';
+import { useRouter } from 'next/router';
 
 const ProductContainer = styled.div`
 	display: flex;
@@ -56,6 +57,7 @@ const ProductList = () => {
 	const productList = useRecoilValue(productListState);
 	// const setItemList = useSetRecoilState(productListState);
 	const sum = useRecoilValue(productListSumState);
+	const router = useRouter();
 
 	return (
 		<div>
@@ -75,7 +77,7 @@ const ProductList = () => {
 				})}
 			</ProductContainer>
 			<p>sum : {sum}</p>
-			<Button variant="contained" onClick={() => window.location.href = '/submit'}>새로운 프로덕트 등록하기</Button>
+			<Button variant="contained" onClick={() => router.push('/submit')}>새로운 프로덕트 등록하기</Button>
 		</div>
 	);
 };
