@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { productListState } from '../../recoil/atoms';
-import { productListSumState } from '../../recoil/selectors';
+import { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { productListSelector, productListSumSelector } from '../../recoil/selectors';
 import { Button } from '@material-ui/core';
 import styled from 'styled-components';
 import { commafy } from '../../utils/numbers';
@@ -53,11 +53,19 @@ export interface IProduct {
 	carbon_emissions: number;
 }
 
-const ProductList = () => {
-	const productList = useRecoilValue(productListState);
-	// const setItemList = useSetRecoilState(productListState);
-	const sum = useRecoilValue(productListSumState);
+type Props = {
+	products: IProduct[]
+}
+
+const ProductList = ({products}: Props) => {
+	const [productList, setProductList] = useRecoilState<IProduct[]>(productListSelector);
+	// const setItemList = useSetRecoilState(products);
+	const sum = useRecoilValue(productListSumSelector);
 	const router = useRouter();
+
+	useEffect(() => {
+		setProductList(products);
+	}, [products]);
 
 	return (
 		<div>

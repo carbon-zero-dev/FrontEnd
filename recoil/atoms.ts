@@ -1,8 +1,8 @@
 import { atom } from 'recoil';
 import { IProduct } from '../components/ProductList';
 
-export const productListState = atom <IProduct[]> ({
-	key: 'todoListState',
+export const productsListState = atom <IProduct[]> ({
+	key: 'productsListState',
 	default: [{
 		id: 1,
 		name: '피카츄',

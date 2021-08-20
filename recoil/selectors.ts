@@ -1,11 +1,19 @@
-import { productListState } from "./atoms"
-import { selector } from "recoil"
+import { productsListState } from './atoms';
+import { selector } from 'recoil';
+import { IProduct } from '../components/ProductList';
 
-export const productListSumState = selector({
-	key: "itemSum",
+export const productListSelector = selector<IProduct[]>({
+	key: "productListSelector",
 	get: ({ get }) => {
-		const itemList = get(productListState)
-		const size = itemList.length;
-		return size;
+		return get(productsListState);
 	},
+	set: ({set}, newValue) => set(productsListState, newValue)
+})
+
+export const productListSumSelector = selector({
+	key: "productListSumSelector",
+	get: ({ get }) => {
+		const itemList = get(productsListState)
+		return itemList.length;
+	}
 })
