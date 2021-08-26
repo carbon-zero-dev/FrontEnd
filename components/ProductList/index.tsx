@@ -11,6 +11,8 @@ import { useRouter } from 'next/router';
 const ProductContainer = styled.div`
 	display: flex;
 	padding: 10px;
+	flex-wrap: wrap;
+	margin: 0 auto;
 `;
 
 const ProductBox = styled.div`
@@ -21,6 +23,7 @@ const ProductBox = styled.div`
 	margin: 10px;
 	width: 25%;
 	min-width: 200px;
+	max-width: 300px;
 	height: fit-content;
 	
 	h3 {
@@ -62,7 +65,6 @@ const ProductList = ({products}: Props) => {
 	// const setItemList = useSetRecoilState(products);
 	const sum = useRecoilValue(productListSumSelector);
 	const router = useRouter();
-	console.log(products);
 	useEffect(() => {
 		setProductList(products);
 	}, [products]);

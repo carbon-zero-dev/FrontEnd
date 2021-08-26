@@ -1,10 +1,18 @@
 import React from 'react';
-import { atom, RecoilRoot, useRecoilValue } from 'recoil';
+import { RecoilRoot } from 'recoil';
 import ProductList from '../components/ProductList';
 import Head from 'next/head';
 import Header from '../components/Header';
 import { useGetProducts } from '../utils/useRequest';
-import { productsListState } from '../recoil/atoms';
+import dynamic from 'next/dynamic';
+
+// eslint-disable-next-line no-undef
+export const HeaderWithNoSSR = dynamic(() => import('../components/Header'), {
+	ssr: false,
+});
+export const ProductListWithNoSSR = dynamic(() => import('../components/ProductList'), {
+	ssr: false,
+});
 
 const App = () => {
 	const { products, error } = useGetProducts("/products", {page: 0, size: 10})
@@ -21,8 +29,8 @@ const App = () => {
 					<title>Carbon Zero</title>
 				</Head>
 				<RecoilRoot>
-					<Header />
-					<ProductList products={products}/>
+					<HeaderWithNoSSR />
+					<ProductListWithNoSSR products={products}/>
 				</RecoilRoot>
 			</>
 		);
