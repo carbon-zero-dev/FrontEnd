@@ -62,7 +62,7 @@ const ProductList = ({products}: Props) => {
 	// const setItemList = useSetRecoilState(products);
 	const sum = useRecoilValue(productListSumSelector);
 	const router = useRouter();
-
+	console.log(products);
 	useEffect(() => {
 		setProductList(products);
 	}, [products]);

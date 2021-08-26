@@ -1,16 +1,20 @@
 import useSWR from "swr"
 
 const fetcher = url => fetch(url).then(res => res.json())
-const baseUrl = process.env.CARBONZERO_API_DOMAIN || 'http://3.36.109.255:8080';
+const baseUrl = process.env.CARBONZERO_API_DOMAIN || 'http://3.38.95.104:8080';
 
-export const useGetProducts = path => {
+type Option = {
+	page: number;
+	size: number
+}
+
+export const useGetProducts = (path: string, option: Option) => {
 	if (!path) {
 		throw new Error("Path is required")
 	}
+	const url = baseUrl + path + `?page=${option.page}&size=${option.size}`
 
-	const url = baseUrl + path
-
-	const { data: products, error } = useSWR(url, fetcher)
-
+	const { data, error } = useSWR(url, fetcher)
+	const products = data?._embedded?.product_response_data_list || [];
 	return { products, error }
 }
