@@ -16,13 +16,12 @@ const ProductContainer = styled.div`
 `;
 
 const ProductBox = styled.div`
-	border: 2px solid blue;
+	border: 2px solid #207567;
 	border-radius: 5px;
 	text-align: center;
 	padding: 10px;
 	margin: 10px;
-	width: 25%;
-	min-width: 200px;
+	width: 50%;
 	max-width: 300px;
 	height: fit-content;
 	

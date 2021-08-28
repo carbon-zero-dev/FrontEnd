@@ -1,4 +1,5 @@
 import { RecoilRoot } from 'recoil';
+import '/style/global.css'
 
 const MyApp = ({Component, pageProps}) => {
 	return (

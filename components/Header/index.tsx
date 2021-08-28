@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const HeaderContainer = styled.div`
   width: 100%;
   height: 80px;
-  background-color: greenyellow;
+  background-color: #8DC3A7;
   color: black;
 	padding: 20px;
 	text-align: center;
