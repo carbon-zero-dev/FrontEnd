@@ -26,12 +26,12 @@ const ProductBox = styled.div`
 	height: fit-content;
 	
 	h3 {
-		margin: 3px 0 3px;
+		margin: 3px 0 13px;
 	}
 	
 	h4 {
 		font-weight: normal;
-		margin: 3px 0 3px;
+		margin: 3px 0 13px;
 	}
 	
 	img {
@@ -79,7 +79,7 @@ const ProductList = ({products}: Props) => {
 							<h3>{product.category}</h3>
 							<h4>{product.description}</h4>
 							<h4>이 제품은 친환경 제품{product.is_eco_friendly ? '입니다.' :'이 아닙니다.'}</h4>
-							{!product.is_eco_friendly && <Button variant="contained">친환경 제품으로 바꾸기</Button> }
+							{!product.is_eco_friendly && <Button variant="contained" style={{marginBottom: '10px'}}>친환경 제품으로 바꾸기</Button> }
 							<h3>₩{commafy(product.price)}</h3>
 						</ProductBox>
 					);
