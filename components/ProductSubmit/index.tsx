@@ -9,7 +9,7 @@ const ProductSubmitForm = styled.form`
 	text-align: center;
 	border: 2px solid #207567;
 	border-radius: 10px;
-	margin: 0 auto;
+	margin: 20px auto;
 	display: flex;
 	flex-direction: column;
 	padding: 40px;
