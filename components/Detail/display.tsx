@@ -7,7 +7,7 @@ const Contents = styled.div`
 	display: flex;
 	flex-direction: row;
 	flex-flow: row wrap;
-	margin: 20px;
+	margin: 100px;
 	max-width: 100%;
 	justify-content: space-evenly;
 
