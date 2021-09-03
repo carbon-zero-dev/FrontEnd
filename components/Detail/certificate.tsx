@@ -2,7 +2,7 @@ import { IProduct } from '../ProductList';
 import React from 'react';
 import styled from 'styled-components';
 
-const Contents = styled.div`
+const Content = styled.div`
 	display: flex;
 	justify-content: center;
 `;
@@ -46,31 +46,33 @@ type Props = {
  */
 const Certificate = ({ products }: Props) => {
 	return (
-		<Contents>
+		<Content>
 			{products.is_eco_friendly ? (
 				// 친환경 제품일 경우
-				<Contents>
+				<Content>
 					<CertificationContainer>
 						<CertificationInfo>
 							<Image
 								src="https://image.edaily.co.kr/images/Photo/files/NP/S/2020/01/PS20012800634.jpg"
 								alt="친환경마크"
 							/>
-							<p>
+							<div>
 								<p className="certification-name">저탄소 인증 제품</p>
-								<div className=""></div>이 상품은 탄소가 적게 배출되는 상품으로
-								친환경적인 상품입니다.
-								<div className=""></div>저탄소제품은 환경성적표지 인증을 받은
-								제품 중 ‘저탄소제품 기준’ 고시에 적합한 제품을 말합니다.{' '}
-							</p>
+								<p>
+									이 상품은 탄소가 적게 배출되는 상품으로 친환경적인 상품입니다.
+									<br />
+									저탄소제품은 환경성적표지 인증을 받은 제품 중 ‘저탄소 제품
+									기준’ 고시에 적합한 제품을 말합니다.
+								</p>
+							</div>
 						</CertificationInfo>
 					</CertificationContainer>
-				</Contents>
+				</Content>
 			) : (
 				// 친환경 제품이 아닐 경우
-				<Contents></Contents>
+				<Content />
 			)}
-		</Contents>
+		</Content>
 	);
 };
 

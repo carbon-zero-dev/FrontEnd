@@ -22,7 +22,7 @@ const Contents = styled.div`
 	}
 `;
 
-const Container1 = styled.div`
+const ProductImage = styled.div`
 	h3.price {
 		text-align: right;
 		color: #6b90dc;
@@ -31,7 +31,7 @@ const Container1 = styled.div`
 	}
 `;
 
-const Container2 = styled.div`
+const ProductDetail = styled.div`
 	height: 50px;
 	background-color: #f7f8fa;
 	display: flex;
@@ -44,7 +44,7 @@ const Container2 = styled.div`
 	}
 `;
 
-const Container3 = styled.div`
+const ProductPoint = styled.div`
 	border: 2.5px solid lightgray;
 	margin-top: 20px;
 	padding: 14px;
@@ -59,7 +59,7 @@ const Container3 = styled.div`
 	}
 `;
 
-const Container4 = styled.div`
+const ExtraProduct = styled.div`
 	border-top: 0.5px solid lightgray;
 	margin-top: 20px;
 	padding: 14px;
@@ -74,7 +74,7 @@ const AddDeleteProduct = styled.div`
 	display: flex;
 `;
 
-const Container5 = styled.div`
+const ProductTotal = styled.div`
 	border-bottom: 0.5px solid lightgray;
 	text-align: right;
 	margin-top: 20px;
@@ -89,7 +89,7 @@ const Container5 = styled.div`
 	}
 `;
 
-const Container6 = styled.div`
+const Stock = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -144,28 +144,28 @@ const DisplayInformation = ({ products }: Props) => {
 	return (
 		<Contents>
 			{/* 상품 이미지 */}
-			<Container1>
+			<ProductImage>
 				<h2 className="title">{products.name}</h2>
 				<h3 className="price">{products.price} 원</h3>
-			</Container1>
+			</ProductImage>
 
-			{/* 상품 구매 주문 상세 */}
-			<Container2>
+			{/* 상품 상세 */}
+			<ProductDetail>
 				<p>
 					<span>삼성카드 간편결제 시 5% 청구할인</span> (최대 2천원)
 				</p>
-			</Container2>
-			<Container3>
+			</ProductDetail>
+			<ProductPoint>
 				<p className="title">탄소 노노 유저만을 위한 혜택</p>
 				<p className="max-point">최대 적립 포인트: {products.price * 0.01}원</p>
 				<p className="basic-point"> ㄴ기본적립: {products.price * 0.004}원</p>
 				<p className="extra-point">
 					맴버십 추가 적립: {products.price * 0.006}원
 				</p>
-			</Container3>
+			</ProductPoint>
 
 			{/* 추가 상품 선택 */}
-			<Container4>
+			<ExtraProduct>
 				<p className="title">추가상품</p>
 				<FormControl variant="outlined" className={classes.formControl}>
 					<InputLabel id="demo-simple-select-outlined-label">
@@ -184,10 +184,10 @@ const DisplayInformation = ({ products }: Props) => {
 						<MenuItem value="1">소프넛 주머니</MenuItem>
 					</Select>
 				</FormControl>
-			</Container4>
+			</ExtraProduct>
 
-			{/* 총 주문 수량 개수 변경 */}
-			<Container5>
+			{/* 총 주문 수량 */}
+			<ProductTotal>
 				<AddDeleteProduct>
 					<IconButton
 						aria-label="delete"
@@ -210,17 +210,17 @@ const DisplayInformation = ({ products }: Props) => {
 				<h3 className="total_price">{`총 가격: ${
 					quantity * products.price
 				}원`}</h3>
-			</Container5>
+			</ProductTotal>
 
 			{/* 재고안내 */}
-			<Container6>
+			<Stock>
 				<ShoppingCartOutlinedIcon
 					fontSize="large"
 					style={{ width: 100, height: 100, color: '#E5E5E5' }}
 				/>
 				<p>이 상품은 현재 구매하실 수 없는 상품입니다.</p>
 				<p>(재입고 시 구매가능)</p>
-			</Container6>
+			</Stock>
 		</Contents>
 	);
 };

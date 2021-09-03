@@ -32,6 +32,9 @@ type Props = {
 const Recommendation = ({ products }: Props) => {
 	// 추천상품 페이징 번호
 	const [recommendPage, setRecommendPage] = React.useState(1);
+	const recommendationList = products.recommendations.filter(
+		(elem: RecommendationItemType) => elem.id >= 1 && elem.id < 6,
+	);
 
 	/**
 	 * 추천 상품 페이징 번호 바꾸는 함수
@@ -55,14 +58,12 @@ const Recommendation = ({ products }: Props) => {
 			</IconButton>
 			{/* 추천 상품 나열 */}
 			<ImageContainer>
-				{products.recommendations.map((elem: RecommendationItemType) => {
-					if (elem.id >= 1 && elem.id < 6) {
-						return (
-							<Link href="/" key={elem.id} passHref>
-								<RecommendationElement props={elem} />
-							</Link>
-						);
-					}
+				{recommendationList.map((elem: RecommendationItemType) => {
+					return (
+						<Link href="/" key={elem.id} passHref>
+							<RecommendationElement props={elem} />
+						</Link>
+					);
 				})}
 			</ImageContainer>
 			{/* 페이징 이동 화살표 아이콘 */}
