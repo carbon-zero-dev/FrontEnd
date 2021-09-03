@@ -1,6 +1,5 @@
 import React from 'react';
-import { RecoilRoot, useRecoilValue } from 'recoil';
-import Head from 'next/head';
+import { useRecoilValue } from 'recoil';
 import dynamic from 'next/dynamic';
 import { productsListState } from '../recoil/atoms';
 
@@ -17,7 +16,6 @@ const App = () => {
 	//
 	// if (error) return <h1>Something went wrong!</h1>
 	// if (!products) return <h1>Loading...</h1>
-
 	// dummy data
 	const products = useRecoilValue(productsListState)
 
