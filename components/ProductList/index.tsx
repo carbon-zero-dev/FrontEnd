@@ -21,7 +21,7 @@ const ProductBox = styled.div`
 	text-align: center;
 	padding: 10px;
 	margin: 10px;
-	width: 50%;
+	width: 100%;
 	max-width: 300px;
 	height: fit-content;
 	
