@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { productListSelector, productListSumSelector } from '../../recoil/selectors';
 import { Button } from '@material-ui/core';
@@ -15,7 +15,7 @@ const ProductContainer = styled.div`
 	margin: 0 auto;
 `;
 
-const ProductBox = styled.div`
+const ProductBoxPC = styled.div`
 	border: 2px solid #207567;
 	border-radius: 5px;
 	text-align: center;
@@ -38,6 +38,45 @@ const ProductBox = styled.div`
 		max-width: 100%;
 		height: 100%;
 		max-height: 20vh;
+	}
+`;
+
+const ProductBoxMobile = styled.div`
+	border: 2px solid #207567;
+	border-radius: 5px;
+	text-align: left;
+	padding: 10px;
+	margin: 10px;
+	width: 100%;
+	display: flex;
+	height: fit-content;
+	justify-content: space-between;
+	
+	div {
+		min-width: calc(100% - 200px);
+	}
+	
+	h2 {
+		font-size: 12px;
+    margin: 2px 0 2px;
+	}
+	
+	h3 {
+    font-size: 10px;
+		margin: 2px 0 2px;
+	}
+	
+	h4 {
+		font-size: 8px;
+		font-weight: normal;
+		margin: 2px 0 2px;
+	}
+	
+	img {
+		max-width: 100%;
+		height: 100%;
+		max-height: 10vh;
+		margin-right: 10px;
 	}
 `;
 
@@ -69,25 +108,41 @@ const ProductList = ({products}: Props) => {
 	}, [products]);
 
 	return (
-		<div>
+		<>
 			<ProductContainer>
 				{productList.map(product => {
-					return (
-						<ProductBox key={product.id}>
-							<h2>{product.name}</h2>
-							<img src={product.image_link[0]} alt='이미지' />
-							<h3>{product.category}</h3>
-							<h4>{product.description}</h4>
-							<h4>이 제품은 친환경 제품{product.is_eco_friendly ? '입니다.' :'이 아닙니다.'}</h4>
-							{!product.is_eco_friendly && <Button variant="contained" style={{marginBottom: '10px'}}>친환경 제품으로 바꾸기</Button> }
-							<h3>₩{commafy(product.price)}</h3>
-						</ProductBox>
-					);
+					if(innerWidth > 450) {
+						return (
+							<ProductBoxPC key={product.id}>
+								<h2>{product.name}</h2>
+								<img src={product.image_link[0]} alt='이미지' />
+								<h3>{product.category}</h3>
+								<h4>{product.description}</h4>
+								<h4>이 제품은 친환경 제품{product.is_eco_friendly ? '입니다.' :'이 아닙니다.'}</h4>
+								{!product.is_eco_friendly && <Button variant="contained" style={{marginBottom: '10px'}}>친환경 제품으로 바꾸기</Button> }
+								<h3>₩{commafy(product.price)}</h3>
+							</ProductBoxPC>
+						);
+					} else {
+						return (
+							<ProductBoxMobile key={product.id}>
+								<img src={product.image_link[0]} alt='이미지' />
+								<div>
+									<h2>{product.name}</h2>
+									<h3>{product.category}</h3>
+									<h4>{product.description}</h4>
+									<h4>이 제품은 친환경 제품{product.is_eco_friendly ? '입니다.' :'이 아닙니다.'}</h4>
+									<h3>₩{commafy(product.price)}</h3>
+								</div>
+									{!product.is_eco_friendly && <Button variant="contained" style={{marginBottom: '2px', fontSize: '10px', padding: '5px', width: '50px'}}>친환경 제품<br/>으로 바꾸기</Button> }
+							</ProductBoxMobile>
+						);
+					}
 				})}
 			</ProductContainer>
 			<p>sum : {sum}</p>
 			<Button variant="contained" onClick={() => router.push('/submit')}>새로운 프로덕트 등록하기</Button>
-		</div>
+		</>
 	);
 };
 
