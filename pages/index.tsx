@@ -1,6 +1,7 @@
-import React from 'react';
 import { RecoilRoot, useRecoilValue } from 'recoil';
+
 import Head from 'next/head';
+import React from 'react';
 import dynamic from 'next/dynamic';
 import { productsListState } from '../recoil/atoms';
 
@@ -8,7 +9,13 @@ import { productsListState } from '../recoil/atoms';
 export const HeaderWithNoSSR = dynamic(() => import('../components/Header'), {
 	ssr: false,
 });
-export const ProductListWithNoSSR = dynamic(() => import('../components/ProductList'), {
+export const ProductListWithNoSSR = dynamic(
+	() => import('../components/ProductList'),
+	{
+		ssr: false,
+	},
+);
+export const FooterWithNoSSR = dynamic(() => import('../components/Header'), {
 	ssr: false,
 });
 
@@ -19,15 +26,14 @@ const App = () => {
 	// if (!products) return <h1>Loading...</h1>
 
 	// dummy data
-	const products = useRecoilValue(productsListState)
+	const products = useRecoilValue(productsListState);
 
-		return (
-			<>
-					<HeaderWithNoSSR />
-					<ProductListWithNoSSR products={products}/>
-			</>
-		);
-	}
-;
-
+	return (
+		<>
+			<HeaderWithNoSSR />
+			<ProductListWithNoSSR products={products} />
+			<FooterWithNoSSR />
+		</>
+	);
+};
 export default App;

@@ -16,6 +16,12 @@ export const LayoutWithNoSSR = dynamic(
 		ssr: false,
 	},
 );
+export const FooterWithNoSSR = dynamic(
+	() => import('../../components/Footer'),
+	{
+		ssr: false,
+	},
+);
 
 /**
  * 상품 상세 페이지
@@ -27,12 +33,13 @@ function Detail({ router, res }) {
 
 	// 더미 데이터를 사용할 때
 	const products = useRecoilValue(productsListState);
-	const ditem = products[`${router.query.id - 1}`];
+	const item = products[`${router.query.id - 1}`];
 
 	return (
 		<div>
 			<HeaderWithNoSSR />
-			<LayoutWithNoSSR products={ditem} />
+			<LayoutWithNoSSR products={item} />
+			<FooterWithNoSSR />
 		</div>
 	);
 }

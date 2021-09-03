@@ -6,6 +6,7 @@ const Contents = styled.div`
 	margin: 20px;
 	text-align: center;
 	margin-top: 200px;
+	margin-bottom: 200px;
 
 	img {
 		max-width: 100%;
