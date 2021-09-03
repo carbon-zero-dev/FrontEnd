@@ -4,10 +4,13 @@ import Display from './display';
 import { IProduct } from '../ProductList';
 import React from 'react';
 import Recommendation from './recommendation';
+import styled from 'styled-components';
 
 type Props = {
 	products: IProduct;
 };
+
+const Container = styled.div``;
 
 /**
  * 상세 페이지의 Layout
@@ -19,12 +22,12 @@ type Props = {
 const DetailLayout = ({ products }: Props) => {
 	return (
 		<>
-			<div className="layout_container">
+			<Container className="layout_container">
 				<Display products={products} />
 				<Recommendation products={products} />
 				<Certificate products={products} />
 				<Detail products={products} />
-			</div>
+			</Container>
 		</>
 	);
 };
