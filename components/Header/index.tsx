@@ -9,16 +9,22 @@ import styled from 'styled-components';
 
 // theme color: 3C9D46 8DC3A7
 const HeaderContainer = styled.div`
-	display: flex;
-	flex-direction: column;
+	margin-bottom: 180px;
 `;
 
 const NavigationBar = styled.div`
-	background-color: #373d3e;
 	display: flex;
+	background-color: #373d3e;
 	justify-content: left;
 	padding: 20px;
 	padding-left: 100px;
+
+	// sticky
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1000;
 `;
 const Banner = styled.div`
 	height: 230px;
@@ -39,7 +45,7 @@ const Header = () => {
 	return (
 		<HeaderContainer>
 			{/* 네비게이션 바 */}
-			<NavigationBar>
+			<NavigationBar class="">
 				<Image src={logo} alt="로고" />
 				<NavBtn href="/"> HOME </NavBtn>
 				<NavBtn href="/"> SHOP </NavBtn>
