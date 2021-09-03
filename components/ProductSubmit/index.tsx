@@ -18,24 +18,25 @@ import {
 import { useRouter } from 'next/router';
 
 const ProductSubmitForm = styled.form`
-	width: 80%;
+	width: ${innerWidth > 450 ? '80%' : 'calc(100% - 40px)'};
 	align-items: center;
 	text-align: center;
 	border: 2px solid #207567;
 	border-radius: 10px;
-	margin: 20px auto;
+	margin: ${innerWidth > 450 ? '20px auto' : '20px'};
 	display: flex;
 	flex-direction: column;
 	padding: 40px;
+	box-sizing: border-box;
 `
 
 const TextFieldInput = styled(TextField)`
-	width: 40%;
+	width: ${innerWidth > 450 ? '40%' : '80%'};
 	margin: 20px auto;
 `
 
 const FormControlContainer = styled(FormControl)`
-	width: 40%;
+	width: ${innerWidth > 450 ? '40%' : '80%'};
 	margin: 20px auto;
 `
 
@@ -76,7 +77,7 @@ const ProductSubmit = () => {
 	}
 	return (
 		<ProductSubmitForm noValidate autoComplete="off">
-			<h1>프로덕트 정보를 입력해주세요.</h1>
+			<h1>프로덕트 정보를<br /> 입력해주세요.</h1>
 			<TextFieldInput id="standard-basic" label="name" error={formValue.name.length !== 0 && !validationCheck('name')} onChange={handleChange('name')} helperText="제품 이름은 2자~20자 이내로 입력해주세요." />
 			<TextFieldInput id="standard-basic" label="brand" onChange={handleChange('brand')} />
 			<FormControlContainer>
