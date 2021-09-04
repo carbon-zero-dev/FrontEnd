@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 const Contents = styled.div`
 	margin: 20px;
+	text-align: center;
+
 	img {
 		max-width: 150px;
 		height: 150px;
@@ -19,7 +21,7 @@ type Props = {
 /**
  * 추천 상품 요소
  */
-const RecommendationElemnet = ({ props }: Props, ref) => {
+const RecommendationElemnet = ({ props }: Props) => {
 	return (
 		<Contents>
 			<img src={props.image} alt="추천 상품 이미지" />

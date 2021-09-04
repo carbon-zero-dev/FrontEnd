@@ -22,6 +22,10 @@ const ImageContainer = styled.div`
 	min-width: 60%;
 	justify-content: left;
 `;
+const LinkContainer = styled.a`
+	text-decoration: none;
+	color: black;
+`;
 
 type Props = {
 	products: IProduct;
@@ -30,10 +34,11 @@ type Props = {
 /**
  * 추천 상품
  */
-const Recommendation = (products: Props) => {
+const Recommendation = ({ products }: Props) => {
 	// 추천상품 페이징 번호
 	const [recommendPage, setRecommendPage] = React.useState(1);
-	const recommendationList = products.products.recommendations.filter(
+	console.log(products);
+	const recommendationList = products.recommendations.filter(
 		elem => elem.id >= 1 && elem.id < 6,
 	);
 
@@ -62,9 +67,9 @@ const Recommendation = (products: Props) => {
 				{recommendationList.map((elem: RecommendationItemType) => {
 					return (
 						<Link href={'/'} passHref key={elem.id}>
-							<a>
+							<LinkContainer>
 								<RecommendationElement props={elem} />
-							</a>
+							</LinkContainer>
 						</Link>
 					);
 				})}
