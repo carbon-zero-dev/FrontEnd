@@ -9,44 +9,28 @@ import styled from 'styled-components';
 
 // theme color: 3C9D46 8DC3A7
 const HeaderContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
-
-const NavigationBar = styled.div`
-	background-color: #373d3e;
-	display: flex;
-	justify-content: left;
+	width: calc(100% - 40px);
+	height: 80px;
+	background-color: #8dc3a7;
+	color: black;
 	padding: 20px;
-	padding-left: 100px;
-`;
-const Banner = styled.div`
-	height: 230px;
-	background-color: #3c9d46;
-`;
+	text-align: center;
+	//box-sizing: border-box;
 
-const NavBtn = styled.a`
-	color: white;
-	font-size: 1em;
-	margin: 1em;
-	padding: 0.25em 1em;
-	margin-left: 60px;
-	cursor: pointer;
-	text-decoration: none;
+	h1 {
+		margin: 0 0 10px;
+	}
+
+	h3 {
+		margin: 0;
+	}
 `;
 
 const Header = () => {
 	return (
 		<HeaderContainer>
-			{/* 네비게이션 바 */}
-			<NavigationBar>
-				<Image src={logo} alt="로고" />
-				<NavBtn href="/"> HOME </NavBtn>
-				<NavBtn href="/"> SHOP </NavBtn>
-				<NavBtn href="/"> INFO </NavBtn>
-			</NavigationBar>
-			{/* 배너 */}
-			{/* <Banner></Banner> */}
+			<h1>탄소노노</h1>
+			<h3>여러분의 선택으로 지구를 살릴 수 있습니다.</h3>
 		</HeaderContainer>
 	);
 };
