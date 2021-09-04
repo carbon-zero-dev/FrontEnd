@@ -1,14 +1,18 @@
 // @flow
+
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+
+import { Button, Modal } from '@material-ui/core';
 import {
 	productListSelector,
 	productListSumSelector,
 } from '../../recoil/selectors';
-import { Button, Modal } from '@material-ui/core';
-import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+
+import Link from 'next/link';
 import { commafy } from '../../utils/numbers';
+import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
 const colorArr = [
@@ -163,7 +167,6 @@ const ProductList = ({ products }: Props) => {
 						return (
 							<ProductBoxPC
 								key={product.id}
-								onClick={() => setIsOpenModal(true)}
 								color={colorArr[Math.floor(Math.random() * colorArr.length)]}
 							>
 								<h2>{product.name}</h2>
@@ -175,10 +178,31 @@ const ProductList = ({ products }: Props) => {
 									{product.is_eco_friendly ? '입니다.' : '이 아닙니다.'}
 								</h4>
 								{!product.is_eco_friendly && (
-									<Button variant="contained" style={{ marginBottom: '10px' }}>
+									<Button
+										variant="contained"
+										style={{ marginBottom: '10px' }}
+										onClick={() => setIsOpenModal(true)}
+									>
 										친환경 제품으로 바꾸기
 									</Button>
 								)}
+								<p>
+									<Link
+										as={`/detail/${product.id}`}
+										href={{
+											pathname: '/detail/[id]',
+										}}
+										passHref
+										key={product.id}
+									>
+										<Button
+											variant="contained"
+											style={{ marginBottom: '10px' }}
+										>
+											제품 자세히
+										</Button>
+									</Link>
+								</p>
 								<h3>₩{commafy(product.price)}</h3>
 							</ProductBoxPC>
 						);
@@ -198,6 +222,23 @@ const ProductList = ({ products }: Props) => {
 										이 제품은 친환경 제품
 										{product.is_eco_friendly ? '입니다.' : '이 아닙니다.'}
 									</h4>
+									<p>
+										<Link
+											as={`/detail/${product.id}`}
+											href={{
+												pathname: '/detail/[id]',
+											}}
+											passHref
+											key={product.id}
+										>
+											<Button
+												variant="contained"
+												style={{ marginBottom: '10px' }}
+											>
+												제품 자세히
+											</Button>
+										</Link>
+									</p>
 									<h3>₩{commafy(product.price)}</h3>
 								</div>
 								{!product.is_eco_friendly && (
