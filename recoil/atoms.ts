@@ -134,9 +134,9 @@ export const productsListState = atom<IProduct[]>({
 				{
 					id: 1,
 					name: '캡슐 생수 오호',
+					price: 1500,
 					image:
 						'https://mblogthumb-phinf.pstatic.net/20150422_122/iemunique119_1429681315025Skl3e_PNG/%BF%C0%C8%A3.png?type=w2',
-					price: 1500,
 				},
 				{
 					id: 2,
