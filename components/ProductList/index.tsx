@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import Link from 'next/link';
+import RecommendationItemType from '../../types/recommendationItem';
 import { commafy } from '../../utils/numbers';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
@@ -140,7 +141,7 @@ export interface IProduct {
 	category: string;
 	is_eco_friendly: boolean;
 	carbon_emissions: number;
-	recommendations: object[];
+	recommendations: RecommendationItemType[];
 }
 
 type Props = {

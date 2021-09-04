@@ -111,6 +111,7 @@ export const productsListState = atom<IProduct[]>({
 				{
 					id: 2,
 					name: '종이로 만든 친환경 물병 추스 워터',
+					price: 1300,
 					image:
 						'http://t1.daumcdn.net/liveboard/bizion/9caca23241814daebd87076096c370c3.JPG',
 				},
@@ -140,6 +141,7 @@ export const productsListState = atom<IProduct[]>({
 				{
 					id: 2,
 					name: '종이로 만든 친환경 물병 추스 워터',
+					price: 2500,
 					image:
 						'http://t1.daumcdn.net/liveboard/bizion/9caca23241814daebd87076096c370c3.JPG',
 				},
