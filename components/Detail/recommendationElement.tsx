@@ -19,7 +19,7 @@ type Props = {
 /**
  * 추천 상품 요소
  */
-const RecommendationElemnet = ({ props }: Props) => {
+const RecommendationElemnet = ({ props }: Props, ref) => {
 	return (
 		<Contents>
 			<img src={props.image} alt="추천 상품 이미지" />

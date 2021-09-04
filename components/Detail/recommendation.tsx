@@ -7,6 +7,7 @@ import React from 'react';
 import RecommendationElement from './recommendationElement';
 import RecommendationItemType from '../../types/recommendationItem';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 const Contents = styled.div`
 	display: flex;
@@ -29,11 +30,11 @@ type Props = {
 /**
  * 추천 상품
  */
-const Recommendation = ({ products }: Props) => {
+const Recommendation = (products: Props) => {
 	// 추천상품 페이징 번호
 	const [recommendPage, setRecommendPage] = React.useState(1);
-	const recommendationList = products.recommendations.filter(
-		(elem: RecommendationItemType) => elem.id >= 1 && elem.id < 6,
+	const recommendationList = products.products.recommendations.filter(
+		elem => elem.id >= 1 && elem.id < 6,
 	);
 
 	/**
@@ -60,8 +61,10 @@ const Recommendation = ({ products }: Props) => {
 			<ImageContainer>
 				{recommendationList.map((elem: RecommendationItemType) => {
 					return (
-						<Link href="/" key={elem.id} passHref>
-							<RecommendationElement props={elem} />
+						<Link href={'/'} passHref key={elem.id}>
+							<a>
+								<RecommendationElement props={elem} />
+							</a>
 						</Link>
 					);
 				})}
