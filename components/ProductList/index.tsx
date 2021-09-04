@@ -2,7 +2,10 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { productListSelector, productListSumSelector } from '../../recoil/selectors';
+import {
+	productListSelector,
+	productListSumSelector,
+} from '../../recoil/selectors';
 import { Button } from '@material-ui/core';
 import styled from 'styled-components';
 import { commafy } from '../../utils/numbers';
@@ -24,16 +27,16 @@ const ProductBox = styled.div`
 	width: 50%;
 	max-width: 300px;
 	height: fit-content;
-	
+
 	h3 {
 		margin: 3px 0 13px;
 	}
-	
+
 	h4 {
 		font-weight: normal;
 		margin: 3px 0 13px;
 	}
-	
+
 	img {
 		max-width: 100%;
 		height: 100%;
@@ -53,14 +56,16 @@ export interface IProduct {
 	category: string;
 	is_eco_friendly: boolean;
 	carbon_emissions: number;
+	recommendations: object[];
 }
 
 type Props = {
-	products: IProduct[]
-}
+	products: IProduct[];
+};
 
-const ProductList = ({products}: Props) => {
-	const [productList, setProductList] = useRecoilState<IProduct[]>(productListSelector);
+const ProductList = ({ products }: Props) => {
+	const [productList, setProductList] =
+		useRecoilState<IProduct[]>(productListSelector);
 	// const setItemList = useSetRecoilState(products);
 	const sum = useRecoilValue(productListSumSelector);
 	const router = useRouter();
@@ -75,18 +80,27 @@ const ProductList = ({products}: Props) => {
 					return (
 						<ProductBox key={product.id}>
 							<h2>{product.name}</h2>
-							<img src={product.image_link[0]} alt='이미지' />
+							<img src={product.image_link[0]} alt="이미지" />
 							<h3>{product.category}</h3>
 							<h4>{product.description}</h4>
-							<h4>이 제품은 친환경 제품{product.is_eco_friendly ? '입니다.' :'이 아닙니다.'}</h4>
-							{!product.is_eco_friendly && <Button variant="contained" style={{marginBottom: '10px'}}>친환경 제품으로 바꾸기</Button> }
+							<h4>
+								이 제품은 친환경 제품
+								{product.is_eco_friendly ? '입니다.' : '이 아닙니다.'}
+							</h4>
+							{!product.is_eco_friendly && (
+								<Button variant="contained" style={{ marginBottom: '10px' }}>
+									친환경 제품으로 바꾸기
+								</Button>
+							)}
 							<h3>₩{commafy(product.price)}</h3>
 						</ProductBox>
 					);
 				})}
 			</ProductContainer>
 			<p>sum : {sum}</p>
-			<Button variant="contained" onClick={() => router.push('/submit')}>새로운 프로덕트 등록하기</Button>
+			<Button variant="contained" onClick={() => router.push('/submit')}>
+				새로운 프로덕트 등록하기
+			</Button>
 		</div>
 	);
 };
