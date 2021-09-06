@@ -4,8 +4,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer({
 	compress: true,
+	react: {
+		useSuspense: false,
+		wait: true,
+	},
 	webpack(config) {
-		console.log(config);
 		let prod = process.env.NODE_ENV === "production";
 		return {
 			...config,

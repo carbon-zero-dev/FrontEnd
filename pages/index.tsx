@@ -1,7 +1,5 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { productsListState } from '../recoil/atoms';
-import { useRecoilValue } from 'recoil';
 
 // eslint-disable-next-line no-undef
 export const HeaderWithNoSSR = dynamic(() => import('../components/Header'), {
@@ -18,13 +16,12 @@ export const FooterWithNoSSR = dynamic(() => import('../components/Footer'), {
 });
 
 const App = () => {
-	// const { products, error } = useGetProducts("/products", {page: 0, size: 10})
+	// const { products, error } = useRecoilValue(fetchProductListSelector);
 	//
 	// if (error) return <h1>Something went wrong!</h1>
 	// if (!products) return <h1>Loading...</h1>
-	// dummy data
-	const products = useRecoilValue(productsListState);
 
+	const products = [];
 	return (
 		<>
 			<HeaderWithNoSSR />
