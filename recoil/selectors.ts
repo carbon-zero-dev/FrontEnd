@@ -1,12 +1,20 @@
 import { productsListState } from './atoms';
 import { selector } from 'recoil';
 import { IProduct } from '../components/ProductList';
-import { UseGetProducts } from '../utils/useRequest';
+import useSWR from 'swr';
+import { baseUrl, fetcher } from '../utils/useRequest';
 
 export const productListSelector = selector<IProduct[]>({
-	key: "productListSelector",
+	key: "get/products",
 	get: ({ get }) => {
-		return get(productsListState);
+		// eslint-disable-next-line no-useless-catch
+		try {
+			// eslint-disable-next-line react-hooks/rules-of-hooks
+			const { data } = useSWR(`${baseUrl}/products/?page=${0}&size=${10}`, fetcher);
+			return data?._embedded?.product_response_data_list || [];
+		} catch (e) {
+			throw e;
+		}
 	},
 	set: ({set}, newValue) => set(productsListState, newValue)
 })
@@ -17,15 +25,4 @@ export const productListSumSelector = selector({
 		const itemList = get(productsListState)
 		return itemList.length;
 	}
-})
-
-export const fetchProductListSelector = selector({
-	key: "FetchProductListSelector",
-	get: async ({get}) => {
-			const arr = get(productsListState);
-			console.log(arr);
-			const { products, error } = UseGetProducts("/products", {page: 0, size: 10});
-			console.log(products);
-			return { products, error };
-	},
-})
+});

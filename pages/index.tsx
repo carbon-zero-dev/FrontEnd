@@ -1,5 +1,10 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { productsListState } from '../recoil/atoms';
+import { baseUrl, fetcher } from '../utils/useRequest';
+import useSWR from 'swr';
+import { productListSelector } from '../recoil/selectors';
 
 // eslint-disable-next-line no-undef
 export const HeaderWithNoSSR = dynamic(() => import('../components/Header'), {
@@ -16,12 +21,9 @@ export const FooterWithNoSSR = dynamic(() => import('../components/Footer'), {
 });
 
 const App = () => {
-	// const { products, error } = useRecoilValue(fetchProductListSelector);
-	//
-	// if (error) return <h1>Something went wrong!</h1>
-	// if (!products) return <h1>Loading...</h1>
+	const [products, _] = useRecoilState(productListSelector);
 
-	const products = [];
+
 	return (
 		<>
 			<HeaderWithNoSSR />
