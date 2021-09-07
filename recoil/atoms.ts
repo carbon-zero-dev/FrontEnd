@@ -21,36 +21,29 @@ export const productsListState = atom<IProduct[]>({
 				{
 					id: 1,
 					name: '캡슐 생수 오호',
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
+					image_link:
+						[ 'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg' ],
 					price: 1500,
 				},
 				{
 					id: 2,
 					name: '종이로 만든 친환경 물병 추스 워터',
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
+					image_link:
+						[ 'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg' ],
 					price: 1500,
 				},
 				{
 					id: 3,
 					name: '라벨 없는 생수 오아시스',
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
+					image_link:
+						[ 'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg'],
 					price: 1500,
 				},
 				{
 					id: 4,
 					name: '분해성분으로 구성된 페트병 생수',
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
-					price: 1500,
-				},
-				{
-					id: 5,
-					name: '분해성분으로 구성된 페트병 생수',
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
+					image_link:
+						['http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg'],
 					price: 1500,
 				},
 			],
@@ -67,29 +60,6 @@ export const productsListState = atom<IProduct[]>({
 			],
 			is_eco_friendly: false,
 			carbon_emissions: 2.5,
-			recommendations: [
-				{
-					id: 1,
-					name: '캡슐 생수 오호',
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
-					price: 1500,
-				},
-				{
-					id: 2,
-					name: '종이로 만든 친환경 물병 추스 워터',
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
-					price: 1500,
-				},
-				{
-					id: 3,
-					name: '라벨 없는 생수 오아시스',
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
-					price: 1500,
-				},
-			],
 		},
 		{
 			id: 3,
@@ -103,22 +73,6 @@ export const productsListState = atom<IProduct[]>({
 			],
 			is_eco_friendly: true,
 			carbon_emissions: 4.5,
-			recommendations: [
-				{
-					id: 1,
-					name: '캡슐 생수 오호',
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
-					price: 1500,
-				},
-				{
-					id: 2,
-					name: '종이로 만든 친환경 물병 추스 워터',
-					price: 1300,
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
-				},
-			],
 		},
 		{
 			id: 4,
@@ -133,22 +87,6 @@ export const productsListState = atom<IProduct[]>({
 			],
 			is_eco_friendly: true,
 			carbon_emissions: 0.2,
-			recommendations: [
-				{
-					id: 1,
-					name: '캡슐 생수 오호',
-					price: 1500,
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
-				},
-				{
-					id: 2,
-					name: '종이로 만든 친환경 물병 추스 워터',
-					price: 2500,
-					image:
-						'http://th3.tmon.kr/thumbs/image/970/460/75a/c64474fd4_700x700_95_FIT.jpg',
-				},
-			],
 		},
 	],
 });

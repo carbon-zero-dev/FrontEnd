@@ -139,7 +139,7 @@ export interface IProduct {
 	category: string;
 	is_eco_friendly: boolean;
 	carbon_emissions: number;
-	recommendations: RecommendationItemType[];
+	recommendations?: RecommendationItemType[];
 }
 
 const ProductList = () => {
