@@ -1,5 +1,6 @@
 import { IProduct } from '../components/ProductList';
 import { atom } from 'recoil';
+import ICategory from '../types/category';
 
 export const productsListState = atom<IProduct[]>({
 	key: 'productsListState',
@@ -150,4 +151,24 @@ export const productsListState = atom<IProduct[]>({
 			],
 		},
 	],
+});
+
+export const categoryListState = atom<ICategory[]>({
+	key: 'categoryListState',
+	default: [
+		{
+			id: 1,
+			name: "패션의류/잡화",
+			code_name: "패션의류/잡화",
+			is_active: true,
+			sub_category_list: []
+		},
+		{
+			id: 2,
+			name: "뷰티",
+			code_name: "뷰티",
+			is_active: true,
+			sub_category_list: []
+		},
+	]
 });

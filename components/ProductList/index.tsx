@@ -1,14 +1,11 @@
 // @flow
 
 import * as React from 'react';
+import { useState } from 'react';
 
 import { Button, Modal } from '@material-ui/core';
-import {
-	productListSelector,
-	productListSumSelector,
-} from '../../recoil/selectors';
-import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { productListSelector, productListSumSelector } from '../../recoil/selectors';
+import { useRecoilValue } from 'recoil';
 
 import Link from 'next/link';
 import RecommendationItemType from '../../types/recommendationItem';
@@ -144,26 +141,17 @@ export interface IProduct {
 	recommendations: RecommendationItemType[];
 }
 
-type Props = {
-	products: IProduct[];
-};
-
-const ProductList = ({ products }: Props) => {
-	const [productList, setProductList] =
-		useRecoilState<IProduct[]>(productListSelector);
-	// const setItemList = useSetRecoilState(products);
+const ProductList = () => {
+	const productList =
+		useRecoilValue<IProduct[]>(productListSelector);
 	const sum = useRecoilValue(productListSumSelector);
 	const router = useRouter();
 	const [isOpenModal, setIsOpenModal] = useState(false);
 
-	useEffect(() => {
-		setProductList(products);
-	}, [products]);
-
 	return (
 		<>
 			<ProductContainer>
-				{productList.map(product => {
+				{productList && productList.length > 0 && productList.map(product => {
 					if (innerWidth > 450) {
 						return (
 							<ProductBoxPC

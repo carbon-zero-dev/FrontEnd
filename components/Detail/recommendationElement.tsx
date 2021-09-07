@@ -26,7 +26,7 @@ const RecommendationElemnet = ({ props }: Props) => {
 		<Contents>
 			<img src={props.image} alt="추천 상품 이미지" />
 			<p>
-				{props.name.length > 8 ? `${props.name.slice(0, 8)}...` : props.name}
+				{props && props.name && props.name.length > 8 ? `${props.name.slice(0, 8)}...` : props.name}
 			</p>
 			<p>{props.price} 원</p>
 		</Contents>

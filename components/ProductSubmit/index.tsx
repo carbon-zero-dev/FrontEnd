@@ -16,6 +16,8 @@ import {
 	TextField,
 } from '@material-ui/core';
 import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { categoryListSelector } from '../../recoil/selectors';
 
 const ProductSubmitForm = styled.form`
 	width: ${innerWidth > 450 ? '80%' : 'calc(100% - 40px)'};
@@ -41,6 +43,8 @@ const FormControlContainer = styled(FormControl)`
 `
 
 const ProductSubmit = () => {
+	const [_categories, _setCategories] = useRecoilState(categoryListSelector);
+
 	const [formValue, setFormValue] = useState({
 		name: '',
 		brand: '',

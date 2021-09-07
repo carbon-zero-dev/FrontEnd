@@ -1,16 +1,20 @@
-import { productsListState } from './atoms';
+import { categoryListState, productsListState } from './atoms';
 import { selector } from 'recoil';
 import { IProduct } from '../components/ProductList';
 import useSWR from 'swr';
 import { baseUrl, fetcher } from '../utils/useRequest';
+import ICategory from '../types/category';
 
 export const productListSelector = selector<IProduct[]>({
 	key: "get/products",
-	get: ({ get }) => {
+	get: async () => {
 		// eslint-disable-next-line no-useless-catch
 		try {
-			// eslint-disable-next-line react-hooks/rules-of-hooks
-			const { data } = useSWR(`${baseUrl}/products/?page=${0}&size=${10}`, fetcher);
+			const res = await fetch(`${baseUrl}/products/?page=${0}&size=${10}`);
+			const data = await res.json();
+
+			console.log(data);
+
 			return data?._embedded?.product_response_data_list || [];
 		} catch (e) {
 			throw e;
@@ -19,10 +23,26 @@ export const productListSelector = selector<IProduct[]>({
 	set: ({set}, newValue) => set(productsListState, newValue)
 })
 
+export const categoryListSelector = selector<ICategory[]>({
+	key: "get/categories",
+	get: async ({ get }) => {
+		// eslint-disable-next-line no-useless-catch
+		try {
+			// eslint-disable-next-line react-hooks/rules-of-hooks
+			const res = await fetch(`${baseUrl}/products/categories`);
+			const data = await res.json();
+			return data || [];
+		} catch (e) {
+			throw e;
+		}
+	},
+	set: ({set}, newValue) => set(categoryListState, newValue)
+})
+
 export const productListSumSelector = selector({
 	key: "productListSumSelector",
 	get: ({ get }) => {
 		const itemList = get(productsListState)
-		return itemList.length;
+		return itemList?.length;
 	}
 });
