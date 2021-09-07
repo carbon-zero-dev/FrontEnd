@@ -16,7 +16,7 @@ import {
 	TextField,
 } from '@material-ui/core';
 import { useRouter } from 'next/router';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { categoryListSelector } from '../../recoil/selectors';
 import { baseUrl } from '../../utils/useRequest';
 
@@ -24,7 +24,8 @@ const ProductSubmitForm = styled.form`
 	width: ${innerWidth > 450 ? '80%' : 'calc(100% - 40px)'};
 	align-items: center;
 	text-align: center;
-	border: 2px solid #207567;
+	border: 4px solid #30cb00;
+	background-color: rgba(164, 251, 166, 0.7);
 	border-radius: 10px;
 	margin: ${innerWidth > 450 ? '20px auto' : '20px'};
 	display: flex;

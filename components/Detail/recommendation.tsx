@@ -10,7 +10,10 @@ import { recommendedProductListSelector } from '../../recoil/selectors';
 const Contents = styled.div`
 	display: flex;
 	padding: 40px;
+	flex-direction: column;
 	justify-content: space-evenly;
+	background-color: rgba(164, 251, 166, 0.7);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;
 const ImageContainer = styled.div`
 	display: flex;
@@ -23,6 +26,10 @@ const ImageContainer = styled.div`
 const LinkContainer = styled.a`
 	text-decoration: none;
 	color: black;
+	
+	:hover {
+		cursor: pointer;
+	}
 `;
 
 type Props = {
@@ -38,10 +45,11 @@ const Recommendation = ({ product }: Props) => {
 	return (
 		<Contents>
 			{/* 추천 상품 나열 */}
+			<h2>이러한 제품들을 사용해 보는 건 어떠세요?</h2>
 			<ImageContainer>
 				{recommendationList && recommendationList?.map((el: RecommendationItemType) => {
 					return (
-						<Link href={'/'} passHref key={el.id}>
+						<Link href={`/detail/${el.id}`} passHref key={el.id}>
 							<LinkContainer>
 								<RecommendationElement props={el} />
 							</LinkContainer>
