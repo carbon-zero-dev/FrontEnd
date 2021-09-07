@@ -8,6 +8,15 @@ module.exports = withBundleAnalyzer({
 		useSuspense: false,
 		wait: true,
 	},
+	devServer: {
+		proxy: {
+			'/products': {
+				target: 'https://www.carbon-zero-dev.tk/',
+				changeOrigin: true,
+				pathRewrite: { '^/products': '' },
+			},
+		}
+	},
 	webpack(config) {
 		let prod = process.env.NODE_ENV === "production";
 		return {

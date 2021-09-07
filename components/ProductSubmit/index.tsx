@@ -16,8 +16,9 @@ import {
 	TextField,
 } from '@material-ui/core';
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { categoryListSelector } from '../../recoil/selectors';
+import { baseUrl } from '../../utils/useRequest';
 
 const ProductSubmitForm = styled.form`
 	width: ${innerWidth > 450 ? '80%' : 'calc(100% - 40px)'};
@@ -43,15 +44,14 @@ const FormControlContainer = styled(FormControl)`
 `
 
 const ProductSubmit = () => {
-	const [_categories, _setCategories] = useRecoilState(categoryListSelector);
-
+	const categories = useRecoilValue(categoryListSelector);
 	const [formValue, setFormValue] = useState({
 		name: '',
 		brand: '',
-		category: '',
+		category_id: '',
 		description: '',
 		price: 0,
-		carbon_emission: 0,
+		carbon_emissions: 0,
 		is_eco_friendly: true
 	});
 
@@ -68,17 +68,42 @@ const ProductSubmit = () => {
 			return formValue.name.length >= 2 && formValue.name.length <= 20
 		} else if(name === 'brand') {
 			return formValue.brand !== ''
-		} else if(name === 'category') {
-			return formValue.category !== ''
+		} else if(name === 'category_id') {
+			return formValue.category_id !== ''
 		} else if(name === 'price') {
 			return formValue.price !== 0
 		}
 	}
 
-	const productValidationCheck = () => {
-		alert('제품이 등록되었습니다!');
-		router.push({pathname: '/'});
+	const productValidationCheck = async () => {
+		console.log(formValue);
+		await fetch(`${baseUrl}/products`, {
+			method: 'POST',
+			mode: 'cors',
+			cache: 'no-cache',
+			credentials: 'same-origin',
+			body: JSON.stringify({...formValue, image_link: ['https://previews.123rf.com/images/baldyrgan/baldyrgan1309/baldyrgan130900283/22348504-%EA%B7%B8%EB%A6%B0-%EC%97%90%EC%BD%94-%EC%97%90%EB%84%88%EC%A7%80-%EA%B0%9C%EB%85%90-%EC%8B%9D%EB%AC%BC%EC%9D%80-%EC%A0%84%EA%B5%AC-%EC%95%88%EC%97%90-%EC%84%B1%EC%9E%A5.jpg']}), // data can be `string` or {object}!
+			headers:{
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			redirect: 'follow',
+			referrer: 'no-referrer',
+		}).then(res => res.json())
+			.then(response => {
+				console.log('Success:', JSON.stringify(response))
+				alert(`제품 등록 성공! ${JSON.stringify(response)}`);
+				router.back();
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert(`제품 등록 실패! ${error}`);
+			});
 	}
+
+	const CategorySection = categories.map((c,idx) => {
+		return <MenuItem key={`${c}-${idx}`} value={`${c.id}`}>{`${c.name}`}</MenuItem>
+	})
+
 	return (
 		<ProductSubmitForm noValidate autoComplete="off">
 			<h1>프로덕트 정보를<br /> 입력해주세요.</h1>
@@ -89,24 +114,23 @@ const ProductSubmit = () => {
 			<Select
 				label="category"
 				id="standard-basic"
-				value={formValue.category}
-				onChange={handleChange('category')}
+				value={formValue.category_id}
+				onChange={handleChange('category_id')}
 			>
-				<MenuItem value='식품 > 생수/음료'>{`식품 > 생수/음료`}</MenuItem>
-				<MenuItem value='생활용품 > 헤어/바디/시안'>{`생활용품 > 헤어/바디/시안`}</MenuItem>
+				{CategorySection}
 			</Select>
 			</FormControlContainer>
 			<TextFieldInput id="standard-basic" label="description (option)" onChange={handleChange('description')}/>
 			<TextFieldInput id="standard-basic" label="price" type="number" InputProps={{
 				startAdornment: <InputAdornment position="start">₩</InputAdornment>,
 			}} onChange={handleChange('price')}/>
-			<TextFieldInput id="standard-basic" label="carbon_emission (option)" type="number" onChange={handleChange('carbon_emission')}/>
+			<TextFieldInput id="standard-basic" label="carbon_emissions (option)" type="number" onChange={handleChange('carbon_emission')}/>
 			<FormLabel style={{textAlign: 'left', marginTop: '20px'}}>is_eco</FormLabel>
 			<RadioGroup aria-label="eco" name="is_eco_friendly" defaultValue="true" onChange={handleChange('is_eco_friendly')}>
 				<FormControlLabel value="true" control={<Radio />} label="true" />
 				<FormControlLabel value="false" control={<Radio />} label="false" />
 			</RadioGroup>
-			<Button variant="contained" type="submit" onClick={productValidationCheck} disabled={!validationCheck('name') || !validationCheck('brand') || !validationCheck('category') || !validationCheck('price')}>프로덕트 등록하기</Button>
+			<Button variant="contained" type="submit" onClick={productValidationCheck} disabled={!validationCheck('name') || !validationCheck('brand') || !validationCheck('category_id') || !validationCheck('price')}>프로덕트 등록하기</Button>
 		</ProductSubmitForm>
 	);
 };
