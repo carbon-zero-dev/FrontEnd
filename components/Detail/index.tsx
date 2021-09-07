@@ -16,17 +16,14 @@ import { useRouter } from 'next/router';
  * Detail: 제품의 상세 설명
  */
 const DetailLayout = () => {
-
 	const router = useRouter();
-
 	const product = useRecoilValue(productDetailSelector(router.query.id));
 
-	console.log(product);
 	return (
 		<>
 			<div className="layout_container">
 				<Display product={product} />
-				{/*<Recommendation product={product} />*/}
+				<Recommendation product={product} />
 				<Certificate product={product} />
 				<Detail product={product} />
 			</div>

@@ -2,7 +2,7 @@ interface RecommendationItemType {
 	id: number;
 	name: string;
 	price: number;
-	image: string;
+	image_link: string[];
 }
 
 export default RecommendationItemType;

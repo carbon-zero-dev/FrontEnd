@@ -39,14 +39,6 @@ export const categoryListSelector = selector<ICategory[]>({
 	set: ({set}, newValue) => set(categoryListState, newValue)
 })
 
-export const productListSumSelector = selector({
-	key: "productListSumSelector",
-	get: ({ get }) => {
-		const itemList = get(productsListState)
-		return itemList?.length;
-	}
-});
-
 export const productDetailSelector = selectorFamily({
 	key: 'productDetailSelector',
 	get: (id) => async () => {{
@@ -55,11 +47,24 @@ export const productDetailSelector = selectorFamily({
 			// eslint-disable-next-line react-hooks/rules-of-hooks
 			const res = await fetch(`${baseUrl}/products/${String(id)}`);
 			const data = await res.json();
+			return data || null;
+		} catch (e) {
+			throw e;
+		}
+	}}
+})
+
+export const recommendedProductListSelector = selectorFamily({
+	key: 'recommendedProductListSelector',
+	get: (id) => async () => {{
+		// eslint-disable-next-line no-useless-catch
+		try {
+			// eslint-disable-next-line react-hooks/rules-of-hooks
+			const res = await fetch(`${baseUrl}/products/recommend/${String(id)}`);
+			const data = await res.json();
 			return data || [];
 		} catch (e) {
 			throw e;
 		}
-	}
-
-	}
+	}}
 })

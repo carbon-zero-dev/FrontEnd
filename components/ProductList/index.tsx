@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useState } from 'react';
 
 import { Button, Modal } from '@material-ui/core';
-import { productListSelector, productListSumSelector } from '../../recoil/selectors';
+import { productListSelector } from '../../recoil/selectors';
 import { useRecoilValue } from 'recoil';
 
 import Link from 'next/link';
@@ -144,7 +144,6 @@ export interface IProduct {
 const ProductList = () => {
 	const productList =
 		useRecoilValue<IProduct[]>(productListSelector);
-	const sum = useRecoilValue(productListSumSelector);
 	const router = useRouter();
 	const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -250,7 +249,6 @@ const ProductList = () => {
 					}
 				})}
 			</ProductContainer>
-			<p>sum : {sum}</p>
 			<Button variant="contained" onClick={() => router.push('/submit')}>
 				새로운 프로덕트 등록하기
 			</Button>

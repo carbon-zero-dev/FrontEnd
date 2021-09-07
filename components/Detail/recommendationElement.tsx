@@ -1,6 +1,7 @@
 import React from 'react';
 import RecommendationItemType from '../../types/recommendationItem';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 const Contents = styled.div`
 	margin: 20px;
@@ -22,9 +23,11 @@ type Props = {
  * 추천 상품 요소
  */
 const RecommendationElemnet = ({ props }: Props) => {
+	const router = useRouter();
+
 	return (
-		<Contents>
-			<img src={props.image} alt="추천 상품 이미지" />
+		<Contents onClick={() => router.push(`/detail/${props.id}`)}>
+			<img src={props.image_link && props.image_link[0]} alt="추천 상품 이미지" />
 			<p>
 				{props && props.name && props.name.length > 8 ? `${props.name.slice(0, 8)}...` : props.name}
 			</p>
