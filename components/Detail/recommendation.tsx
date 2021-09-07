@@ -28,17 +28,17 @@ const LinkContainer = styled.a`
 `;
 
 type Props = {
-	products: IProduct;
+	product: IProduct;
 };
 
 /**
  * 추천 상품
  */
-const Recommendation = ({ products }: Props) => {
+const Recommendation = ({ product }: Props) => {
 	// 추천상품 페이징 번호
 	const [recommendPage, setRecommendPage] = React.useState(1);
-	console.log(products);
-	const recommendationList = products.recommendations.filter(
+	console.log(product);
+	const recommendationList = product?.recommendations.filter(
 		elem => elem.id >= 1 && elem.id < 6,
 	);
 

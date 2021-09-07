@@ -4,10 +4,9 @@ import Display from './display';
 import { IProduct } from '../ProductList';
 import React from 'react';
 import Recommendation from './recommendation';
-
-type Props = {
-	products: IProduct;
-};
+import { useRecoilValue } from 'recoil';
+import { productDetailSelector } from '../../recoil/selectors';
+import { useRouter } from 'next/router';
 
 /**
  * 상세 페이지의 Layout
@@ -16,14 +15,20 @@ type Props = {
  * Certificate: 친환경 상품일 경우 친환경 인증 마크에 대한 설명
  * Detail: 제품의 상세 설명
  */
-const DetailLayout = ({ products }: Props) => {
+const DetailLayout = () => {
+
+	const router = useRouter();
+
+	const product = useRecoilValue(productDetailSelector(router.query.id));
+
+	console.log(product);
 	return (
 		<>
 			<div className="layout_container">
-				<Display products={products} />
-				<Recommendation products={products} />
-				<Certificate products={products} />
-				<Detail products={products} />
+				<Display product={product} />
+				{/*<Recommendation product={product} />*/}
+				<Certificate product={product} />
+				<Detail product={product} />
 			</div>
 		</>
 	);

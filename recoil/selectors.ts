@@ -1,12 +1,12 @@
 import { categoryListState, productsListState } from './atoms';
-import { selector } from 'recoil';
+import { selector, selectorFamily } from 'recoil';
 import { IProduct } from '../components/ProductList';
 import useSWR from 'swr';
 import { baseUrl, fetcher } from '../utils/useRequest';
 import ICategory from '../types/category';
 
 export const productListSelector = selector<IProduct[]>({
-	key: "get/products",
+	key: "get/product",
 	get: async () => {
 		// eslint-disable-next-line no-useless-catch
 		try {
@@ -46,3 +46,20 @@ export const productListSumSelector = selector({
 		return itemList?.length;
 	}
 });
+
+export const productDetailSelector = selectorFamily({
+	key: 'productDetailSelector',
+	get: (id) => async () => {{
+		// eslint-disable-next-line no-useless-catch
+		try {
+			// eslint-disable-next-line react-hooks/rules-of-hooks
+			const res = await fetch(`${baseUrl}/products/${String(id)}`);
+			const data = await res.json();
+			return data || [];
+		} catch (e) {
+			throw e;
+		}
+	}
+
+	}
+})

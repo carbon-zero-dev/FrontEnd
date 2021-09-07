@@ -15,22 +15,22 @@ const Contents = styled.div`
 `;
 
 type Props = {
-	products?: IProduct;
+	product?: IProduct;
 };
 
 /**
  * 제품 상세 설명
  */
-const DetailLayout = ({ products }: Props) => {
+const DetailLayout = ({ product }: Props) => {
 	return (
 		<>
 			<Contents>
-				<p>{products.description}</p>
-				<img src={products.image_link[0]} alt="제품 상세 이미지" />
-				<p>{products.description}</p>
-				<img src={products.image_link[0]} alt="제품 상세 이미지" />
-				<p>{products.description}</p>
-				<img src={products.image_link[0]} alt="제품 상세 이미지" />
+				<p>{product.description}</p>
+				<img src={product.image_link[0]} alt="제품 상세 이미지" />
+				<p>{product.description}</p>
+				<img src={product.image_link[0]} alt="제품 상세 이미지" />
+				<p>{product.description}</p>
+				<img src={product.image_link[0]} alt="제품 상세 이미지" />
 			</Contents>
 		</>
 	);

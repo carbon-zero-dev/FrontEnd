@@ -19,18 +19,18 @@ const Contents = styled.div`
 `;
 
 type Props = {
-	products?: IProduct;
+	product?: IProduct;
 };
 
 /**
  * Display: 상품의 이미지와 구매와 관련된 설명
  */
-const DisplayLayout = ({ products }: Props) => {
+const DisplayLayout = ({ product }: Props) => {
 	return (
 		<>
 			<Contents className="layout_container">
-				<img src={products.image_link[0]} alt="상품 이미지" />
-				<DisplayInformation products={products} />
+				<img src={product.image_link[0]} alt="상품 이미지" />
+				<DisplayInformation products={product} />
 			</Contents>
 		</>
 	);

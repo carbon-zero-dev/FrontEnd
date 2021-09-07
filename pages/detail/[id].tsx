@@ -1,7 +1,5 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { productsListState } from '../../recoil/atoms';
-import { useRecoilValue } from 'recoil';
 import { withRouter } from 'next/router';
 
 export const HeaderWithNoSSR = dynamic(
@@ -21,18 +19,11 @@ export const LayoutWithNoSSR = dynamic(
  * 상품 상세 페이지
  */
 
-function Detail({ router, res }) {
-	// 상품 API 가져올 때
-	// const item = res.data;
-
-	// 더미 데이터를 사용할 때
-	const products = useRecoilValue(productsListState);
-	const ditem = products[`${router.query.id - 1}`];
-
+function Detail() {
 	return (
 		<div>
 			<HeaderWithNoSSR />
-			<LayoutWithNoSSR products={ditem} />
+			<LayoutWithNoSSR />
 		</div>
 	);
 }
