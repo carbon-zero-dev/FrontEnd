@@ -1,14 +1,11 @@
 // @flow
 
 import * as React from 'react';
+import { useState } from 'react';
 
 import { Button, Modal } from '@material-ui/core';
-import {
-	productListSelector,
-	productListSumSelector,
-} from '../../recoil/selectors';
-import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { productListSelector } from '../../recoil/selectors';
+import { useRecoilValue } from 'recoil';
 
 import Link from 'next/link';
 import RecommendationItemType from '../../types/recommendationItem';
@@ -17,26 +14,26 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
 const colorArr = [
-	'#DFEAE2',
-	'#B4D6C1',
-	'#8DC3A7',
+	'#a4fba6',
+	'#4ae54a',
+	'#30cb00',
 	'#6BAF92',
-	'#4E9C81',
+	'#0f9200',
 	'#358873',
-	'#207567',
+	'#006203',
 ];
 
 const ProductContainer = styled.div`
 	display: flex;
 	padding: 10px;
 	flex-wrap: wrap;
-	margin: 0 auto;
+	margin-top: 12vh;
 `;
 
 const ProductBoxPC = styled.div<{ color: string }>`
 	border: 2px solid ${props => props.color};
 	background-color: ${props => props.color};
-	border-radius: 5px;
+	border-radius: 10px;
 	text-align: center;
 	padding: 10px;
 	margin: 10px;
@@ -67,11 +64,11 @@ const ProductBoxMobile = styled.div<{ color: string }>`
 	border-radius: 5px;
 	text-align: left;
 	padding: 10px;
-	margin: 10px;
 	width: 100%;
+	margin: 10px;
 	display: flex;
 	height: fit-content;
-	justify-content: space-between;
+	justify-content: flex-start;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
 	div {
@@ -95,9 +92,10 @@ const ProductBoxMobile = styled.div<{ color: string }>`
 	}
 
 	img {
+		width: 100px;
 		max-width: 100%;
 		height: 100%;
-		max-height: 10vh;
+		max-height: 100%;
 		margin-right: 10px;
 	}
 `;
@@ -141,38 +139,27 @@ export interface IProduct {
 	category: string;
 	is_eco_friendly: boolean;
 	carbon_emissions: number;
-	recommendations: RecommendationItemType[];
+	recommendations?: RecommendationItemType[];
 }
 
-type Props = {
-	products: IProduct[];
-};
-
-const ProductList = ({ products }: Props) => {
-	const [productList, setProductList] =
-		useRecoilState<IProduct[]>(productListSelector);
-	// const setItemList = useSetRecoilState(products);
-	const sum = useRecoilValue(productListSumSelector);
+const ProductList = () => {
+	const productList =
+		useRecoilValue<IProduct[]>(productListSelector);
 	const router = useRouter();
 	const [isOpenModal, setIsOpenModal] = useState(false);
-
-	useEffect(() => {
-		setProductList(products);
-	}, [products]);
-
 	return (
 		<>
 			<ProductContainer>
-				{productList.map(product => {
+				{productList && productList.length > 0 && productList.map((product, idx) => {
 					if (innerWidth > 450) {
 						return (
 							<ProductBoxPC
 								key={product.id}
-								color={colorArr[Math.floor(Math.random() * colorArr.length)]}
+								color={colorArr[idx%colorArr.length]}
 							>
 								<h2>{product.name}</h2>
 								<img src={product.image_link[0]} alt="이미지" />
-								<h3>{product.category}</h3>
+								<h3>{product.category.slice(0, 10)}</h3>
 								<h4>{product.description}</h4>
 								<h4>
 									이 제품은 친환경 제품
@@ -212,7 +199,7 @@ const ProductList = ({ products }: Props) => {
 							<ProductBoxMobile
 								key={product.id}
 								onClick={() => setIsOpenModal(true)}
-								color={colorArr[Math.floor(Math.random() * colorArr.length)]}
+								color={colorArr[idx%colorArr.length]}
 							>
 								<img src={product.image_link[0]} alt="이미지" />
 								<div>
@@ -262,10 +249,6 @@ const ProductList = ({ products }: Props) => {
 					}
 				})}
 			</ProductContainer>
-			<p>sum : {sum}</p>
-			<Button variant="contained" onClick={() => router.push('/submit')}>
-				새로운 프로덕트 등록하기
-			</Button>
 			<Modal
 				open={isOpenModal}
 				onClose={() => setIsOpenModal(false)}

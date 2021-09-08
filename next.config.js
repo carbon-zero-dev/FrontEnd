@@ -4,8 +4,20 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer({
 	compress: true,
+	react: {
+		useSuspense: false,
+		wait: true,
+	},
+	devServer: {
+		proxy: {
+			'/products': {
+				target: 'https://www.carbon-zero-dev.tk/',
+				changeOrigin: true,
+				pathRewrite: { '^/products': '' },
+			},
+		}
+	},
 	webpack(config) {
-		console.log(config);
 		let prod = process.env.NODE_ENV === "production";
 		return {
 			...config,

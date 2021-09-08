@@ -51,10 +51,6 @@ const Header = () => {
 
 	return (
 		<FooterContainer>
-			{/* submit으로 이동 */}
-			<GoToSubmit>
-				<Btn href="/submit">내 물건 팔기</Btn>
-			</GoToSubmit>
 			{/* 맨 위로 이동 */}
 			<ScrollToTop>
 				<ScrollBtn onClick={scrollToTop}>맨 위로</ScrollBtn>

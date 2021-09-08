@@ -38,16 +38,16 @@ const Image = styled.img`
 `;
 
 type Props = {
-	products?: IProduct;
+	product?: IProduct;
 };
 
 /**
  * 친환경 인증 컴포넌트
  */
-const Certificate = ({ products }: Props) => {
+const Certificate = ({ product }: Props) => {
 	return (
 		<Content>
-			{products.is_eco_friendly ? (
+			{product.is_eco_friendly ? (
 				// 친환경 제품일 경우
 				<Content>
 					<CertificationContainer>
