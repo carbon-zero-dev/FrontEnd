@@ -36,7 +36,8 @@
 
 ### [ 시스템 구성 및 아키텍처 ]
 
-[structure 이미지]
+![structure](https://user-images.githubusercontent.com/67178982/132516863-f0fc6198-6546-4b95-9954-bd10c1852c06.png)
+(업데이트 예정)
 - Route53
 - 무중단 배포: green-blue deployment로 무중단 배포지원
 - CloudWatch로 상태 로깅
@@ -45,7 +46,8 @@
 - Amazon RDS로 MariaDB 지원
 - GitAction+ ECR+ ECS: 배포자동화
 
-[file 구조 이미지]
+![file 구조](https://user-images.githubusercontent.com/67178982/132516775-3a587315-2bfa-49c1-9e97-93eb7772f767.PNG)
+(업데이트 예정)
 - pages: 라우팅 구현.
 - components: 페이지 컴포넌트 구현
 - coverage: jest 커버리지 관련 파일
