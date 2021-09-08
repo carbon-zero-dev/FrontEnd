@@ -8,7 +8,6 @@
 
 ### [ What is Carbon Zero ]
 
-- 
 
 ### [ 개발환경 ]
 
