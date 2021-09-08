@@ -41,21 +41,21 @@ const ScrollBtn = styled.button`
 	outline: inherit;
 `;
 
-const Header = () => {
+const Footer = () => {
 	/**
 	 * 맨 위로 이동
 	 */
-	const scrollToTop = () => {
-		window.scrollTo(0, 0);
+	const scrollToTop = (x, y) => {
+		window.scrollTo(x, y);
 	};
 
 	return (
 		<FooterContainer>
 			{/* 맨 위로 이동 */}
 			<ScrollToTop>
-				<ScrollBtn onClick={scrollToTop}>맨 위로</ScrollBtn>
+				<ScrollBtn onClick={() => scrollToTop(0, 0)}>맨 위로</ScrollBtn>
 			</ScrollToTop>
 		</FooterContainer>
 	);
 };
-export default Header;
+export default Footer;

@@ -4,9 +4,13 @@ import Display from './display';
 import { IProduct } from '../ProductList';
 import React from 'react';
 import Recommendation from './recommendation';
-import { useRecoilValue } from 'recoil';
 import { productDetailSelector } from '../../recoil/selectors';
+import { useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
+
+type Props = {
+	product?: IProduct;
+};
 
 /**
  * 상세 페이지의 Layout
@@ -15,9 +19,12 @@ import { useRouter } from 'next/router';
  * Certificate: 친환경 상품일 경우 친환경 인증 마크에 대한 설명
  * Detail: 제품의 상세 설명
  */
-const DetailLayout = () => {
+const DetailLayout = ({ testProduct }: Props) => {
 	const router = useRouter();
-	const product = useRecoilValue(productDetailSelector(router.query.id));
+
+	const product = router
+		? useRecoilValue(productDetailSelector(router.query.id))
+		: testProduct;
 
 	return (
 		<>

@@ -19,22 +19,13 @@ export const LayoutWithNoSSR = dynamic(
  * 상품 상세 페이지
  */
 
-function Detail() {
+function Detail({ testProduct }) {
 	return (
 		<div>
 			<HeaderWithNoSSR />
-			<LayoutWithNoSSR />
+			<LayoutWithNoSSR testProduct={testProduct} />
 		</div>
 	);
 }
 
-/**
- * 상품 하나의 정보를 가져온다 (axios로 통신할 때 사용)
- * @returns product: object
- */
-// Detail.getInitialProps = async function () {
-// 	const res = await axios.get('http://3.37.43.224:8080/products/3');
-// 	return { res };
-// };
-
-export default withRouter(Detail);
+export default Detail;
