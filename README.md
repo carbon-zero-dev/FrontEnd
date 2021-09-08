@@ -37,7 +37,7 @@
 
 ![structure](https://user-images.githubusercontent.com/67178982/132516863-f0fc6198-6546-4b95-9954-bd10c1852c06.png)
 (업데이트 예정)
-- Route53
+- Route53: DNS, https 기능 지원
 - 무중단 배포: green-blue deployment로 무중단 배포지원
 - CloudWatch로 상태 로깅
 - Vercel: FrontEnd WAS 지원
