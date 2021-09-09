@@ -4,11 +4,12 @@
 	"description": "Repository for NextJS learning",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "next",
 		"build": "next build",
 		"build:analyze": "ANALYZE=true next build",
-		"start": "next start"
+		"start": "next start",
+		"test:watch": "jest --verbose --coverage --watchAll",
+		"test": "jest --verbose --coverage "
 	},
 	"repository": {
 		"type": "git",
@@ -22,12 +23,12 @@
 	},
 	"homepage": "https://github.com/joielee09/NextJS_tryout#readme",
 	"dependencies": {
+		"@babel/preset-env": "^7.15.4",
 		"@material-ui/core": "^4.12.3",
 		"@material-ui/icons": "^4.11.2",
 		"@next/bundle-analyzer": "^11.1.0",
 		"axios": "^0.21.1",
 		"eslint-plugin-react": "^7.24.0",
-		"jest": "^27.0.6",
 		"next": "^11.0.1",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
@@ -36,13 +37,22 @@
 		"swr": "^0.5.6"
 	},
 	"devDependencies": {
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^12.0.0",
+		"@testing-library/react-hooks": "^7.0.2",
+		"@testing-library/user-event": "^13.2.1",
+		"@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+		"babel-jest": "^27.1.0",
 		"babel-plugin-styled-components": "^1.13.2",
+		"enzyme": "^3.11.0",
 		"eslint": "^7.2.0",
 		"eslint-config-airbnb-base": "^14.2.1",
 		"eslint-config-next": "^11.1.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-import": "^2.22.1",
 		"eslint-plugin-prettier": "^3.4.0",
+		"jest": "^27.1.0",
+		"jest-next-dynamic": "^1.0.1",
 		"prettier": "2.3.2",
 		"typescript": "^4.3.5"
 	}
