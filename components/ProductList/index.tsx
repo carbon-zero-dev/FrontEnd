@@ -1,17 +1,17 @@
 // @flow
 
 import * as React from 'react';
-import { useState } from 'react';
 
 import { Button, Modal } from '@material-ui/core';
-import { productListSelector } from '../../recoil/selectors';
-import { useRecoilValue } from 'recoil';
 
 import Link from 'next/link';
 import RecommendationItemType from '../../types/recommendationItem';
 import { commafy } from '../../utils/numbers';
+import { productListSelector } from '../../recoil/selectors';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const colorArr = [
 	'#a4fba6',
@@ -143,73 +143,38 @@ export interface IProduct {
 }
 
 const ProductList = () => {
-	const productList =
-		useRecoilValue<IProduct[]>(productListSelector);
+	const productList = useRecoilValue<IProduct[]>(productListSelector);
 	const router = useRouter();
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	return (
 		<>
 			<ProductContainer>
-				{productList && productList.length > 0 && productList.map((product, idx) => {
-					if (innerWidth > 450) {
-						return (
-							<ProductBoxPC
-								key={product.id}
-								color={colorArr[idx%colorArr.length]}
-							>
-								<h2>{product.name}</h2>
-								<img src={product.image_link[0]} alt="이미지" />
-								<h3>{product.category.slice(0, 10)}</h3>
-								<h4>{product.description}</h4>
-								<h4>
-									이 제품은 친환경 제품
-									{product.is_eco_friendly ? '입니다.' : '이 아닙니다.'}
-								</h4>
-								{!product.is_eco_friendly && (
-									<Button
-										variant="contained"
-										style={{ marginBottom: '10px' }}
-										onClick={() => setIsOpenModal(true)}
-									>
-										친환경 제품으로 바꾸기
-									</Button>
-								)}
-								<p>
-									<Link
-										as={`/detail/${product.id}`}
-										href={{
-											pathname: '/detail/[id]',
-										}}
-										passHref
-										key={product.id}
-									>
-										<Button
-											variant="contained"
-											style={{ marginBottom: '10px' }}
-										>
-											제품 자세히
-										</Button>
-									</Link>
-								</p>
-								<h3>₩{commafy(product.price)}</h3>
-							</ProductBoxPC>
-						);
-					} else {
-						return (
-							<ProductBoxMobile
-								key={product.id}
-								onClick={() => setIsOpenModal(true)}
-								color={colorArr[idx%colorArr.length]}
-							>
-								<img src={product.image_link[0]} alt="이미지" />
-								<div>
+				{productList &&
+					productList.length > 0 &&
+					productList.map((product, idx) => {
+						if (innerWidth > 450) {
+							return (
+								<ProductBoxPC
+									key={product.id}
+									color={colorArr[idx % colorArr.length]}
+								>
 									<h2>{product.name}</h2>
-									<h3>{product.category}</h3>
+									<img src={product.image_link[0]} alt="이미지" />
+									<h3>{product.category.slice(0, 10)}</h3>
 									<h4>{product.description}</h4>
 									<h4>
 										이 제품은 친환경 제품
 										{product.is_eco_friendly ? '입니다.' : '이 아닙니다.'}
 									</h4>
+									{!product.is_eco_friendly && (
+										<Button
+											variant="contained"
+											style={{ marginBottom: '10px' }}
+											onClick={() => setIsOpenModal(true)}
+										>
+											친환경 제품으로 바꾸기
+										</Button>
+									)}
 									<p>
 										<Link
 											as={`/detail/${product.id}`}
@@ -228,26 +193,62 @@ const ProductList = () => {
 										</Link>
 									</p>
 									<h3>₩{commafy(product.price)}</h3>
-								</div>
-								{!product.is_eco_friendly && (
-									<Button
-										variant="contained"
-										style={{
-											marginBottom: '2px',
-											fontSize: '10px',
-											padding: '5px',
-											width: '50px',
-										}}
-									>
-										친환경 제품
-										<br />
-										으로 바꾸기
-									</Button>
-								)}
-							</ProductBoxMobile>
-						);
-					}
-				})}
+								</ProductBoxPC>
+							);
+						} else {
+							return (
+								<ProductBoxMobile
+									key={product.id}
+									onClick={() => setIsOpenModal(true)}
+									color={colorArr[idx % colorArr.length]}
+								>
+									<img src={product.image_link[0]} alt="이미지" />
+									<div>
+										<h2>{product.name}</h2>
+										<h3>{product.category}</h3>
+										<h4>{product.description}</h4>
+										<h4>
+											이 제품은 친환경 제품
+											{product.is_eco_friendly ? '입니다.' : '이 아닙니다.'}
+										</h4>
+										<p>
+											<Link
+												as={`/detail/${product.id}`}
+												href={{
+													pathname: '/detail/[id]',
+												}}
+												passHref
+												key={product.id}
+											>
+												<Button
+													variant="contained"
+													style={{ marginBottom: '10px' }}
+												>
+													제품 자세히
+												</Button>
+											</Link>
+										</p>
+										<h3>₩{commafy(product.price)}</h3>
+									</div>
+									{!product.is_eco_friendly && (
+										<Button
+											variant="contained"
+											style={{
+												marginBottom: '2px',
+												fontSize: '10px',
+												padding: '5px',
+												width: '50px',
+											}}
+										>
+											친환경 제품
+											<br />
+											으로 바꾸기
+										</Button>
+									)}
+								</ProductBoxMobile>
+							);
+						}
+					})}
 			</ProductContainer>
 			<Modal
 				open={isOpenModal}

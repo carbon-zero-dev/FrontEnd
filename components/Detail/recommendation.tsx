@@ -3,9 +3,9 @@ import Link from 'next/link';
 import React from 'react';
 import RecommendationElement from './recommendationElement';
 import RecommendationItemType from '../../types/recommendationItem';
+import { recommendedProductListSelector } from '../../recoil/selectors';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { recommendedProductListSelector } from '../../recoil/selectors';
 
 const Contents = styled.div`
 	display: flex;
@@ -13,7 +13,7 @@ const Contents = styled.div`
 	flex-direction: column;
 	justify-content: space-evenly;
 	background-color: rgba(164, 251, 166, 0.7);
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;
 const ImageContainer = styled.div`
 	display: flex;
@@ -26,7 +26,7 @@ const ImageContainer = styled.div`
 const LinkContainer = styled.a`
 	text-decoration: none;
 	color: black;
-	
+
 	:hover {
 		cursor: pointer;
 	}
@@ -40,22 +40,26 @@ type Props = {
  * 추천 상품
  */
 const Recommendation = ({ product }: Props) => {
-	const recommendationList = useRecoilValue(recommendedProductListSelector(product.id));
+	// const recommendationList = useRecoilValue(
+	// 	recommendedProductListSelector(product.id),
+	// );
+	const recommendationList = product.recommendations;
 
 	return (
 		<Contents>
 			{/* 추천 상품 나열 */}
 			<h2>이러한 제품들을 사용해 보는 건 어떠세요?</h2>
 			<ImageContainer>
-				{recommendationList && recommendationList?.map((el: RecommendationItemType) => {
-					return (
-						<Link href={`/detail/${el.id}`} passHref key={el.id}>
-							<LinkContainer>
-								<RecommendationElement props={el} />
-							</LinkContainer>
-						</Link>
-					);
-				})}
+				{recommendationList &&
+					recommendationList?.map((el: RecommendationItemType) => {
+						return (
+							<Link href={`/detail/${el.id}`} passHref key={el.id}>
+								<LinkContainer>
+									<RecommendationElement props={el} />
+								</LinkContainer>
+							</Link>
+						);
+					})}
 			</ImageContainer>
 		</Contents>
 	);
