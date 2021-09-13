@@ -12,6 +12,8 @@ import RecommendationItemType from '../../types/recommendationItem';
 import { commafy } from '../../utils/numbers';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import defaultImg from '/assets/Zero-done.jpeg'
 
 const colorArr = [
 	'#a4fba6',
@@ -158,7 +160,7 @@ const ProductList = () => {
 								color={colorArr[idx%colorArr.length]}
 							>
 								<h2>{product.name}</h2>
-								<img src={product.image_link[0]} alt="이미지" />
+								<Image src={product.image_link[0] || defaultImg as any} alt="이미지" />
 								<h3>{product.category.slice(0, 10)}</h3>
 								<h4>{product.description}</h4>
 								<h4>
@@ -201,7 +203,7 @@ const ProductList = () => {
 								onClick={() => setIsOpenModal(true)}
 								color={colorArr[idx%colorArr.length]}
 							>
-								<img src={product.image_link[0]} alt="이미지" />
+								<Image src={product.image_link[0] || defaultImg as any} alt="이미지" />
 								<div>
 									<h2>{product.name}</h2>
 									<h3>{product.category}</h3>
