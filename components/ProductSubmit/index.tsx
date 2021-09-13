@@ -77,7 +77,6 @@ const ProductSubmit = () => {
 	}
 
 	const productValidationCheck = async () => {
-		console.log(formValue);
 		await fetch(`${baseUrl}/products`, {
 			method: 'POST',
 			mode: 'cors',
@@ -103,7 +102,38 @@ const ProductSubmit = () => {
 
 	const CategorySection = categories.map((c,idx) => {
 		return <MenuItem key={`${c}-${idx}`} value={`${c.id}`}>{`${c.name}`}</MenuItem>
-	})
+	});
+
+	const uploadImageToS3 = async (e) => {
+		const preview = document.querySelector('img') as any;
+		const file = e.target.files[0];
+		const reader = new FileReader();
+
+		if (file) {
+			reader.readAsDataURL(file);
+			reader.onloadend = async () => {
+				const base64data = reader.result;
+				preview.src = base64data;
+				// TODO
+				// await fetch('https://3wrgp1bkp5.execute-api.ap-northeast-2.amazonaws.com/carbon_prod/carbontest', {
+				// 	method: 'POST',
+				// 	mode: 'cors',
+				// 	cache: 'no-cache',
+				// 	credentials: 'same-origin',
+				// 	headers:{
+				// 		'Content-Type': 'Content-Type: text/plain',
+				// 		'x-api-key': 'AhUcyHh5VU6LTRbj1G3oD8DSMIbRqKj06EfUT415'
+				// 	},
+				// 	redirect: 'follow',
+				// 	referrer: 'no-referrer',
+				// 	body: JSON.stringify({
+				// 		IMAGE: base64data
+				// 	})
+				// }).then(res => res.json()).then(res => console.log(res));
+			}
+		}
+
+	}
 
 	return (
 		<ProductSubmitForm noValidate autoComplete="off">
@@ -131,6 +161,14 @@ const ProductSubmit = () => {
 				<FormControlLabel value="true" control={<Radio />} label="true" />
 				<FormControlLabel value="false" control={<Radio />} label="false" />
 			</RadioGroup>
+			<input
+				accept="image/*"
+				id="contained-button-file"
+				multiple
+				type="file"
+				onChange={uploadImageToS3}
+			/>
+			<img id="upload-image" src='https://static.thenounproject.com/png/59103-200.png' width="100" height="100" alt="이미지" />
 			<Button variant="contained" type="submit" onClick={productValidationCheck} disabled={!validationCheck('name') || !validationCheck('brand') || !validationCheck('category_id') || !validationCheck('price')}>프로덕트 등록하기</Button>
 		</ProductSubmitForm>
 	);

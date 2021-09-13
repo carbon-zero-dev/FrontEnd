@@ -11,9 +11,14 @@ module.exports = withBundleAnalyzer({
 	devServer: {
 		proxy: {
 			'/products': {
-				target: 'https://www.carbon-zero-dev.tk/',
+				target: 'https://www.carbon-zero.kr',
 				changeOrigin: true,
 				pathRewrite: { '^/products': '' },
+			},
+			'/carbon_prod/carbontest': {
+				target: 'https://3wrgp1bkp5.execute-api.ap-northeast-2.amazonaws.com',
+				changeOrigin: true,
+				pathRewrite: { '^/carbon_prod/carbontest': '' },
 			},
 		}
 	},

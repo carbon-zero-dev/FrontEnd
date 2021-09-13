@@ -10,11 +10,8 @@ export const productListSelector = selector<IProduct[]>({
 	get: async () => {
 		// eslint-disable-next-line no-useless-catch
 		try {
-			const res = await fetch(`${baseUrl}/products/?page=${0}&size=${10}`);
+			const res = await fetch(`${baseUrl}/products/?page=${0}&size=${20}`);
 			const data = await res.json();
-
-			console.log(data);
-
 			return data?._embedded?.product_response_data_list || [];
 		} catch (e) {
 			throw e;
