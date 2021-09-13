@@ -114,22 +114,22 @@ const ProductSubmit = () => {
 			reader.onloadend = async () => {
 				const base64data = reader.result;
 				preview.src = base64data;
-
-				await fetch('https://3wrgp1bkp5.execute-api.ap-northeast-2.amazonaws.com/carbon_prod/carbontest', {
-					method: 'POST',
-					mode: 'cors',
-					cache: 'no-cache',
-					credentials: 'same-origin',
-					headers:{
-						'Content-Type': 'Content-Type: text/plain',
-						'x-api-key': 'AhUcyHh5VU6LTRbj1G3oD8DSMIbRqKj06EfUT415'
-					},
-					redirect: 'follow',
-					referrer: 'no-referrer',
-					body: JSON.stringify({
-						IMAGE: base64data
-					})
-				}).then(res => res.json()).then(res => console.log(res));
+				// TODO
+				// await fetch('https://3wrgp1bkp5.execute-api.ap-northeast-2.amazonaws.com/carbon_prod/carbontest', {
+				// 	method: 'POST',
+				// 	mode: 'cors',
+				// 	cache: 'no-cache',
+				// 	credentials: 'same-origin',
+				// 	headers:{
+				// 		'Content-Type': 'Content-Type: text/plain',
+				// 		'x-api-key': 'AhUcyHh5VU6LTRbj1G3oD8DSMIbRqKj06EfUT415'
+				// 	},
+				// 	redirect: 'follow',
+				// 	referrer: 'no-referrer',
+				// 	body: JSON.stringify({
+				// 		IMAGE: base64data
+				// 	})
+				// }).then(res => res.json()).then(res => console.log(res));
 			}
 		}
 
