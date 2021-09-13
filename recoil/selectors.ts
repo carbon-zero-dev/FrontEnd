@@ -12,9 +12,6 @@ export const productListSelector = selector<IProduct[]>({
 		try {
 			const res = await fetch(`${baseUrl}/products/?page=${0}&size=${20}`);
 			const data = await res.json();
-
-			console.log(data);
-
 			return data?._embedded?.product_response_data_list || [];
 		} catch (e) {
 			throw e;

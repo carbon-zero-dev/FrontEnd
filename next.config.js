@@ -15,6 +15,11 @@ module.exports = withBundleAnalyzer({
 				changeOrigin: true,
 				pathRewrite: { '^/products': '' },
 			},
+			'/carbon_prod/carbontest': {
+				target: 'https://3wrgp1bkp5.execute-api.ap-northeast-2.amazonaws.com',
+				changeOrigin: true,
+				pathRewrite: { '^/carbon_prod/carbontest': '' },
+			},
 		}
 	},
 	webpack(config) {
