@@ -53,7 +53,8 @@ const ProductSubmit = () => {
 		description: '',
 		price: 0,
 		carbon_emissions: 0,
-		is_eco_friendly: true
+		is_eco_friendly: true,
+		image_link: ['https://dl.dropbox.com/s/5r047c5fqiwbv8m/wrater.jpg']
 	});
 
 	const router = useRouter();
@@ -82,21 +83,17 @@ const ProductSubmit = () => {
 			mode: 'cors',
 			cache: 'no-cache',
 			credentials: 'same-origin',
-			body: JSON.stringify({...formValue, image_link: ['https://previews.123rf.com/images/baldyrgan/baldyrgan1309/baldyrgan130900283/22348504-%EA%B7%B8%EB%A6%B0-%EC%97%90%EC%BD%94-%EC%97%90%EB%84%88%EC%A7%80-%EA%B0%9C%EB%85%90-%EC%8B%9D%EB%AC%BC%EC%9D%80-%EC%A0%84%EA%B5%AC-%EC%95%88%EC%97%90-%EC%84%B1%EC%9E%A5.jpg']}), // data can be `string` or {object}!
+			body: JSON.stringify(formValue), // data can be `string` or {object}!
 			headers:{
-				'Content-Type': 'application/x-www-form-urlencoded'
+				'Content-Type': 'application/json'
 			},
 			redirect: 'follow',
 			referrer: 'no-referrer',
 		}).then(res => res.json())
 			.then(response => {
-				console.log('Success:', JSON.stringify(response))
-				alert(`제품 등록 성공! ${JSON.stringify(response)}`);
 				router.back();
 			})
 			.catch(error => {
-				console.error('Error:', error);
-				alert(`제품 등록 실패! ${error}`);
 			});
 	}
 
